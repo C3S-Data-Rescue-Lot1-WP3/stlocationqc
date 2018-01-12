@@ -1,14 +1,18 @@
 Package: rgeoname
 Type: Package
-Title: Attributes a Geographic Name to a Pair of Geographic Coordinates
+Title: A package for the quality control of meteorological stations location 
 Version: 0.0.0.9000
 Author: person("Clara", "Ventura", email = "mcmventura@fc.ul.pt", role = c("aut", "cre"))
-Afiliation: FCiências.ID - Associação para a Investigação e Desenvolvimento de Ciências (University of Lisbon)
+Affiliation: FCiencias.ID - Associacao para a Investigacao e Desenvolvimento de Ciencias (Faculty of Sciences - University of Lisbon)
 Maintainer: Clara Ventura <mcmventura@fc.ul.pt>
-Description: Given a pair of geographic coordinates (latitude, longitude), attributtes to it a country name, a marine region name or a sea name.
+Description: Attributes a Geographic Name to a Pair of Geographic Coordinates Given a list of geographic coordinates (longitude, latitude), determines it's location, i.e., a country or a marine region (e.g.: "Canada", "North Atlantic Sea", "Fijian Part of the Pacific Ocean" or "Fijian Exclusive Economic Zone").
+URL: https://github.com/mcmventura/rgeoname
+BugReports: https://github.com/mcmventura/rgeoname/issues
 License: >= GPL-2
 Encoding: UTF-8
 LazyData: true
-Imports: 
-    rgdal (>= 1.2.13),
-    sp (>= 12.5)
+Imports:
+    rgdal (>= 1.2.16),
+    sp (>= 1.2-5)
+RoxygenNote: 6.0.1
+Suggests: testthat
