@@ -1,31 +1,49 @@
 #'
-#' Determines the marine regions names for other points
+#' Determines Geographic Names for other Points Located in the Continent or in
+#' the Sea.
 #'
-#' Determines the  country names for points in the boundaries of continent with
-#' Exclusive Economic Zones (EEZ) and the sea/ocean/EEZ names for other points
-#' in a marine region.
+#' Determines the  country names for points in the shoreline and the EEZ names
+#' for other points in a marine region.
 #'
-#' @details Input: The file <marine_regions_na.txt> created by
-#'   \code{\link{get_marine}} which contains the missing name points that left.
-#'   Those points are located in the boundaries of continent with marine regions
-#'   and in marine regions not covered by the polygons of the shapefile used by
-#'   \code{\link{get_marine}}; Three shapefiles: the first with country names
-#'   (resulting from the union of EEZ with respective countries), the second
-#'   with the IHO Sea names and the third with the EEZ names.
+#' @details
+#' \itemize{
+#' \item The input is the file 'marine_regions_na.txt', created by
+#' \code{\link{get_sea}}, which contains the missing name points that left.
+#' Those points are located in the boundaries of continent with marine regions
+#' and in marine regions not covered by the polygons of the shapefile used in
+#' \code{\link{get_sea}}.
+#' \item The function does the following:
+#' \enumerate{
+#' \item If exists 'seas_na.txt' created by get_sea, automatically loads and
+#' reads the coordinates file;
+#' \item Preserves the 'id' assigned to the coordinates in
+#' \code{\link{get_country}} or in \code{\link{get_sea}}, necessary to display
+#' the coordinates in the initial order at the end of the process;
+#' \item Uses \code{\link[mregions]{mr_shp}} to access the Marineregions.org Web
+#' Feature Service and get: 1. The shapefile with the polygons resulting from
+#' the union of EEZ with respective countries; 2. The shapefile with the EEZ
+#' polygons;
+#' \item Writes a file with points and their country and/or sea names and
+#' another file with points that remain unnamed (if they exist). Also writes a
+#' report about the points processed;
+#' \item Assigns the designation "NO_NAME" to the points that eventually remain
+#' unnamed.
+#' }
+#' \item Output:
+#' \enumerate{
+#' \item A .txt file named 'countries_seas.txt'. The header is: 'id' 'longitude'
+#' 'latitude' 'country'/'country_eez'. The points without a name that eventualy
+#' can occur after running the function, are integrated in that file with the
+#' designation 'NO_NAME';
+#' \item A .txt file named 'countries_seas_na.txt' with the points unnamed, if
+#' they exist;
+#' \item A .txt file named 'report_get_country_sea.txt'.
+#' }
+#' }
 #'
-#'   Preserves the 'id' assigned to the coordinates in \code{\link{get_country}}
-#'   or in \code{\link{get_marine}}.
-#'
-#'   Output: writes the countries and marine regions names in
-#'   <countries_seas.txt>; writes the missing name points (if they exist) in
-#'   <countries_seas_na.txt>; writes a processing report in
-#'   <report_get_country_sea.txt>. The points without a name that eventualy can
-#'   occur after running this function, are integrated in <countries_seas.txt>
-#'   with de designation "NO_NAME".
-#'
-#' @seealso Requires \code{\link[rgdal]{readOGR}},
-#'   \code{\link[sp]{SpatialPoints}} and \code{\link[sp]{over}} to determine the
-#'   country names.
+#' @seealso Requires \code{\link[mregions]{mr_shp}},
+#'   \code{\link[sp]{SpatialPoints}}, \code{\link[sp]{CRS-class}} and
+#'   \code{\link[sp]{over}} to determine the country names.
 #'
 #' @references Flanders Marine Institute (2016). Maritime Boundaries
 #'   Geodatabase, version 1. Available online at http://www.marineregions.org/.
@@ -35,112 +53,104 @@
 #'   Zones (version 2). Available online at http://www.marineregions.org/.
 #'   Consulted on 2017-11-15.
 #'
-#'   VLIZ (2017). IHO Sea Areas, version 2. Available online at
-#'   http://www.marineregions.org/. Consulted on 2017-10-10.
+#' @examples
+#' \dontrun{
+#' ##
+#' ## Execute one of the examples of \code{\link{get_country}} and then run the
+#' ## two functions below sequentially:
+#' get_sea()
+#' get_country_sea()
+#' }
 #'
+#' @export
 get_country_sea <- function() {
-    if (file.exists("marine_regions_na.txt")) {
-        coords <- read.table("marine_regions_na.txt", header = TRUE, sep = "\t", quote = "")
-        coords_id <- coords$id
-        coords$id <- NULL
-        coords$marine_region <- NULL
-        print("", quote = FALSE)
-        print("Processing Country/Sea names...", quote = FALSE)
-        print("", quote = FALSE)
-        gname_sp <- rgdal::readOGR(dsn = ".", layer = "EEZ_land_v2_201410")
-        coords_sp <- sp::SpatialPoints(coords, proj4string = sp::CRS(proj4string(gname_sp)))
-        indices <- sp::over(coords_sp, gname_sp)
-        gname <- data.frame(id = coords_id, longitude = coords$longitude, latitude = coords$latitude, country = indices$Country)
-        countries <- na.omit(gname)
-        countries_na <- gname[is.na(gname$country), ]
-        # write.table(countries, file = 'countries2.txt', row.names = FALSE, col.names = TRUE, sep = '\t', quote = FALSE)
-        if (nrow(countries_na) == 0) {
-            write.table(countries, file = "countries_seas.txt", row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
-            report <- cbind(c("Coordinate pairs processed: ", "Country/Sea/EEZ names returned: ", "Country/Sea/EEZ names missing: "),
-                c(nrow(gname), nrow(countries), nrow(countries_na)))
-            write.table(report, file = "report_get_country_sea.txt", row.names = FALSE, col.names = FALSE, sep = "\t", quote = FALSE)
-            print("", quote = FALSE)
-            print("Check < countries_seas.txt > and < report_get_country_sea.txt >.", quote = FALSE)
-            print("", quote = FALSE)
-            return(report)
-        } else {
-            # write.table(countries_na, file = 'countries2_na.txt', row.names = FALSE, col.names = TRUE, sep = '\t', quote = FALSE)
-            coords2_id <- countries_na$id
-            countries_na$id <- NULL
-            countries_na$country <- NULL
-            print("", quote = FALSE)
-            print("Processing Sea names...", quote = FALSE)
-            print("", quote = FALSE)
-            gname2_sp <- rgdal::readOGR(dsn = ".", layer = "World_Seas_IHO_v2")
-            coords2_sp <- sp::SpatialPoints(countries_na, proj4string = sp::CRS(proj4string(gname2_sp)))
-            indices <- sp::over(coords2_sp, gname2_sp)
-            gname2 <- data.frame(id = coords2_id, longitude = countries_na$longitude, latitude = countries_na$latitude, sea = indices$NAME)
-            seas <- na.omit(gname2)
-            seas_na <- gname2[is.na(gname2$sea), ]
-            # write.table(seas, file = 'seas2.txt', row.names = FALSE, col.names = TRUE, sep = '\t', quote = FALSE)
-            if (nrow(seas_na) == 0) {
-                names(countries)[4] <- "country_sea"
-                names(seas)[4] <- "country_sea"
-                countries_seas <- rbind(countries, seas)
-                write.table(countries_seas, file = "countries_seas.txt", row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
-                report <- cbind(c("Coordinate pairs processed: ", "Country/Sea/EEZ names returned: ", "Country/Sea/EEZ names missing: "), c(nrow(gname), nrow(countries_seas), nrow(seas_na)))
-                write.table(report, file = "report_get_country_sea.txt", row.names = FALSE, col.names = FALSE, sep = "\t", quote = FALSE)
-                print("", quote = FALSE)
-                print("Check < countries_seas.txt > and < report_get_country_sea.txt >.", quote = FALSE)
-                print("", quote = FALSE)
-                return(report)
-            } else {
-                #write.table(seas_na, file = "seas2_na.txt", row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
-                coords3_id <- seas_na$id
-                seas_na$id <- NULL
-                seas_na$sea <- NULL
-                print("", quote = FALSE)
-                print("Processing EEZ names...", quote = FALSE)
-                print("", quote = FALSE)
-                gname3_sp <- rgdal::readOGR(dsn = ".", layer = "eez")
-                coords3_sp <- sp::SpatialPoints(seas_na, proj4string = sp::CRS(proj4string(gname3_sp)))
-                indices <- sp::over(coords3_sp, gname3_sp)
-                gname3 <- data.frame(id = coords3_id, longitude = seas_na$longitude, latitude = seas_na$latitude, eez = indices$GeoName)
-                eezs <- na.omit(gname3)
-                eezs_na <- gname3[is.na(gname3$eez), ]
-                #write.table(eezs, file = "eezs2.txt", row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
-                if (nrow(eezs_na) == 0) {
-                  names(countries)[4] <- "country_sea"
-                  names(seas)[4] <- "country_sea"
-                  names(eezs)[4] <- "country_sea"
-                  countries_seas <- rbind(countries, seas, eezs)
-                  write.table(countries_seas, file = "countries_seas.txt", row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
-                  report <- cbind(c("Coordinate pairs processed: ", "Country/Sea/EEZ names returned: ", "Country/Sea/EEZ names missing: "), c(nrow(gname), nrow(countries_seas), nrow(eezs_na)))
-                  write.table(report, file = "report_get_country_sea.txt", row.names = FALSE, col.names = FALSE, sep = "\t", quote = FALSE)
-                  print("", quote = FALSE)
-                  print("Check < countries_seas.txt > and < report_get_country_sea.txt >.", quote = FALSE)
-                  print("", quote = FALSE)
-                  return(report)
-                } else {
-                  print("", quote = FALSE)
-                  print("The output still has coordinate pairs without a name. Please, report the problem.", quote = FALSE)
-                  print("The points without a name received the indication of < NO_NAME > in the column < country_sea >.", quote = FALSE)
-                  print("", quote = FALSE)
-                  write.table(eezs_na, file = "countries_seas_na.txt", row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
-                  names(countries)[4] <- "country_sea"
-                  names(seas)[4] <- "country_sea"
-                  names(eezs)[4] <- "country_sea"
-                  names(eezs_na)[4] <- "country_sea"
-                  eezs_na$country_sea <- "NO_NAME"
-                  countries_seas <- rbind(countries, seas, eezs, eezs_na)
-                  write.table(countries_seas, file = "countries_seas.txt", row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
-                  report <- cbind(c("Coordinate pairs processed: ", "Country/Sea/EEZ names returned: ", "Country/Sea/EEZ names missing: "), c(nrow(gname), nrow(countries_seas), nrow(eezs_na)))
-                  write.table(report, file = "report_get_country_sea.txt", row.names = FALSE, col.names = FALSE, sep = "\t", quote = FALSE)
-                  print("", quote = FALSE)
-                  print("Check < countries_seas.txt > and < report_get_country_sea.txt >.", quote = FALSE)
-                  print("Then run < order_data() > to restore the inicial order of the coordinates.")
-                  print("", quote = FALSE)
-                  return(report)
-                }
-            }
-        }
+  if (file.exists("seas_na.txt")) {
+    coords <- read.table("seas_na.txt", header = TRUE, sep = "\t", quote = "")
+    coords_id <- coords$id
+    coords$id <- NULL
+    coords$iho_sea <- NULL
+    print("", quote = FALSE)
+    print("Processing country names for points in the shoreline...", quote = FALSE)
+    print("", quote = FALSE)
+
+    eez_land <- mregions::mr_shp(key = "MarineRegions:eez_land", maxFeatures = 300)
+    nec_fields <- c("objectid","iso_3digit","country")
+    eez_land_subset <- eez_land[ ,nec_fields]
+    names(eez_land_subset) <- nec_fields
+    gname_sp <- eez_land_subset
+
+    coords_sp <- sp::SpatialPoints(coords, proj4string = sp::CRS(sp::proj4string(gname_sp), doCheckCRSArgs = FALSE))
+    indices <- sp::over(coords_sp, gname_sp)
+    gname <- data.frame(id = coords_id, longitude = coords$longitude, latitude = coords$latitude, country = indices$country)
+    countries2 <- na.omit(gname)
+    countries2_na <- gname[is.na(gname$country), ]
+
+    if (nrow(countries2_na) == 0) {
+      write.table(countries2, file = "countries_seas.txt", row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
+      rep_coun <- cbind(c("Coordinate pairs processed: ", "Country names (for points in the shoreline) returned: ", "Country names (for points in the shoreline) missing: "), c(nrow(gname), nrow(countries2), nrow(countries2_na)))
+      write.table(rep_coun, file = "report_get_country_sea.txt", row.names = FALSE, col.names = FALSE, sep = "\t", quote = FALSE)
+      print("", quote = FALSE)
+      print("Check 'countries_seas.txt' and 'report_get_country_sea.txt'.", quote = FALSE)
+      print("Please run 'order_data()' to restore the inicial order of the coordinates.", quote = FALSE)
+      print("", quote = FALSE)
+      return(rep_coun)
+
     } else {
+
+      print("Processing the remaining EEZ names...", quote = FALSE)
+      print("", quote = FALSE)
+      coords2_id <- countries2_na$id
+      countries2_na$id <- NULL
+      countries2_na$country <- NULL
+
+      eez <- mregions::mr_shp(key = "MarineRegions:eez", maxFeatures = 300)
+      nec_fields2 <- c("mrgid", "geoname")
+      eez_subset <- eez[ ,nec_fields2]
+      names(eez_subset) <- c("mrgid", "eez")
+      gname2_sp <- eez_subset
+      coords2_sp <- sp::SpatialPoints(countries2_na, proj4string = sp::CRS(sp::proj4string(gname2_sp), doCheckCRSArgs = FALSE))
+      indices2 <- sp::over(coords2_sp, gname2_sp)
+      gname2 <- data.frame(id = coords2_id, longitude = countries2_na$longitude, latitude = countries2_na$latitude, eez = indices2$eez)
+      eezs2 <- na.omit(gname2)
+      eezs2_na <- gname2[is.na(gname2$eez), ]
+
+      names(countries2)[4] <- "country_eez"
+      names(eezs2)[4] <- "country_eez"
+      countries_eezs <- rbind(countries2, eezs2)
+
+      if (nrow(eezs2_na) == 0){
+        write.table(countries_eezs, file = "countries_seas.txt", row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
+        rep_coun <- cbind(c("Coordinate pairs processed: ", "Country names (for points in the shoreline) returned: ", "Country names (for points in the shoreline) missing: "), c(nrow(gname), nrow(countries2), nrow(countries2_na)))
+        rep_eez <- cbind(c("Coordinate pairs processed: ", "EEZ (remaining) names returned: ", "EEZ (remaining) names missing: "), c(nrow(gname2), nrow(eezs2), nrow(eezs2_na)))
+        rep_tot <- cbind(c("Total of coordinate pairs processed: ", "Country and EEZ names returned: ", "Country and EEZ names missing: "), c(nrow(gname), nrow(countries2) + nrow(eezs2), nrow(eezs2_na)))
+        report <- rbind(rep_coun, rep_eez, rep_tot)
+        write.table(report, file = "report_get_country_sea.txt", row.names = FALSE, col.names = FALSE, sep = "\t", quote = FALSE)
+        print("Check 'countries_seas.txt' and 'report_get_country_sea.txt'.", quote = FALSE)
         print("", quote = FALSE)
-        print("Missing the file < marine_regions_na.txt >.", quote = FALSE)
+
+      } else {
+        names(eezs2_na)[4] <- "country_eez"
+        eezs2_na$country_eez <- "NO_NAME"
+        countries_eezs_all <- rbind(countries_eezs, eezs2_na)
+        write.table(countries_eezs_all, file = "countries_seas.txt", row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
+        rep_coun <- cbind(c("Coordinate pairs processed: ", "Country names (for points in the shoreline) returned: ", "Country names (for points in the shoreline) missing: "), c(nrow(gname), nrow(countries2), nrow(countries2_na)))
+        rep_eez <- cbind(c("Coordinate pairs processed: ", "EEZ (remaining) names returned: ", "EEZ (remaining) names missing: "), c(nrow(gname2), nrow(eezs2), nrow(eezs2_na)))
+        rep_tot <- cbind(c("Total of coordinate pairs processed: ", "Country and EEZ names returned: ", "Country and EEZ names missing: "), c(nrow(gname), nrow(countries2) + nrow(eezs2), nrow(eezs2_na)))
+        report <- rbind(rep_coun, rep_eez, rep_tot)
+        write.table(report, file = "report_get_country_sea.txt", row.names = FALSE, col.names = FALSE, sep = "\t", quote = FALSE)
+        write.table(eezs2_na, file = "countries_seas_na.txt", row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
+        print("", quote = FALSE)
+        print("Check 'countries_seas.txt' and 'report_get_country_sea.txt'.", quote = FALSE)
+        print("There are sea names missing, please  check 'countries_seas_na.txt.", quote = FALSE)
+        # Plotar os NA sobre a controrno dos países
+        # Fazer uma função para plotar que é chamada pelas outras
+      }
+      print("Please run 'order_data()' to restore the inicial order of the coordinates.")
+      print("", quote = FALSE)
+      return(report)
     }
+  } else {
+    print("", quote = FALSE)
+    print("Missing the input file 'seas_na.txt'.", quote = FALSE)
+  }
 }

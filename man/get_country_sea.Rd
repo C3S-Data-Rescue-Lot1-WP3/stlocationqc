@@ -2,33 +2,60 @@
 % Please edit documentation in R/2_get_country_sea.R
 \name{get_country_sea}
 \alias{get_country_sea}
-\title{Determines the marine regions names for other points}
+\title{Determines Geographic Names for other Points Located in the Continent or in
+the Sea.}
 \usage{
 get_country_sea()
 }
 \description{
-Determines the  country names for points in the boundaries of continent with
-Exclusive Economic Zones (EEZ) and the sea/ocean/EEZ names for other points
-in a marine region.
+Determines the  country names for points in the shoreline and the EEZ names
+for other points in a marine region.
 }
 \details{
-Input: The file <marine_regions_na.txt> created by
-  \code{\link{get_marine}} which contains the missing name points that left.
-  Those points are located in the boundaries of continent with marine regions
-  and in marine regions not covered by the polygons of the shapefile used by
-  \code{\link{get_marine}}; Three shapefiles: the first with country names
-  (resulting from the union of EEZ with respective countries), the second
-  with the IHO Sea names and the third with the EEZ names.
+\itemize{
+\item The input is the file 'marine_regions_na.txt', created by
+\code{\link{get_sea}}, which contains the missing name points that left.
+Those points are located in the boundaries of continent with marine regions
+and in marine regions not covered by the polygons of the shapefile used in
+\code{\link{get_sea}}.
+\item The function does the following:
+\enumerate{
+\item If exists 'seas_na.txt' created by get_sea, automatically loads and
+reads the coordinates file;
+\item Preserves the 'id' assigned to the coordinates in
+\code{\link{get_country}} or in \code{\link{get_sea}}, necessary to display
+the coordinates in the initial order at the end of the process;
+\item Uses \code{\link[mregions]{mr_shp}} to access the Marineregions.org Web
+Feature Service and get: 1. The shapefile with the polygons resulting from
+the union of EEZ with respective countries; 2. The shapefile with the EEZ
+polygons;
+\item Writes a file with points and their country and/or sea names and
+another file with points that remain unnamed (if they exist). Also writes a
+report about the points processed;
+\item Assigns the designation "NO_NAME" to the points that eventually remain
+unnamed.
+}
+\item Output:
+\enumerate{
+\item A .txt file named 'countries_seas.txt'. The header is: 'id' 'longitude'
+'latitude' 'country'/'country_eez'. The points without a name that eventualy
+can occur after running the function, are integrated in that file with the
+designation 'NO_NAME';
+\item A .txt file named 'countries_seas_na.txt' with the points unnamed, if
+they exist;
+\item A .txt file named 'report_get_country_sea.txt'.
+}
+}
+}
+\examples{
+\dontrun{
+##
+## Execute one of the examples of \\code{\\link{get_country}} and then run the
+## two functions below sequentially:
+get_sea()
+get_country_sea()
+}
 
-  Preserves the 'id' assigned to the coordinates in \code{\link{get_country}}
-  or in \code{\link{get_marine}}.
-
-  Output: writes the countries and marine regions names in
-  <countries_seas.txt>; writes the missing name points (if they exist) in
-  <countries_seas_na.txt>; writes a processing report in
-  <report_get_country_sea.txt>. The points without a name that eventualy can
-  occur after running this function, are integrated in <countries_seas.txt>
-  with de designation "NO_NAME".
 }
 \references{
 Flanders Marine Institute (2016). Maritime Boundaries
@@ -38,12 +65,9 @@ Flanders Marine Institute (2016). Maritime Boundaries
   VLIZ (2014). Union of the ESRI Country shapefile and the Exclusive Economic
   Zones (version 2). Available online at http://www.marineregions.org/.
   Consulted on 2017-11-15.
-
-  VLIZ (2017). IHO Sea Areas, version 2. Available online at
-  http://www.marineregions.org/. Consulted on 2017-10-10.
 }
 \seealso{
-Requires \code{\link[rgdal]{readOGR}},
-  \code{\link[sp]{SpatialPoints}} and \code{\link[sp]{over}} to determine the
-  country names.
+Requires \code{\link[mregions]{mr_shp}},
+  \code{\link[sp]{SpatialPoints}}, \code{\link[sp]{CRS-class}} and
+  \code{\link[sp]{over}} to determine the country names.
 }
