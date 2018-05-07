@@ -1,18 +1,15 @@
 Package: rgeoname
-Type: Package
-Title: A package for the quality control of meteorological stations location 
+Title: A Package for the Quality Control of Meteorological Stations Location
 Version: 0.0.0.9000
-Author: person("Clara", "Ventura", email = "mcmventura@fc.ul.pt", role = c("aut", "cre"))
-Affiliation: FCiencias.ID - Associacao para a Investigacao e Desenvolvimento de Ciencias (Faculty of Sciences - University of Lisbon)
-Maintainer: Clara Ventura <mcmventura@fc.ul.pt>
-Description: Attributes a Geographic Name to a Pair of Geographic Coordinates Given a list of geographic coordinates (longitude, latitude), determines it's location, i.e., a country or a marine region (e.g.: "Canada", "North Atlantic Sea", "Fijian Part of the Pacific Ocean" or "Fijian Exclusive Economic Zone").
+Authors@R: person("Clara", "Ventura", email = "mcmventura@fc.ul.pt", role = c("aut", "cre"))
+Affiliation: FCiencias.ID - Sciences Association for Research and Development (Faculty of Sciences University of Lisbon)
+Description: Given a list of coordinate points (longitude, latitude), attributes a country name or marine region name to each point.
 URL: https://github.com/mcmventura/rgeoname
 BugReports: https://github.com/mcmventura/rgeoname/issues
-License: >= GPL-2
+Depends: R (>= 3.4.3)
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Imports:
-    rgdal (>= 1.2.16),
-    sp (>= 1.2-5)
+Imports: mregions,
+    sp
 RoxygenNote: 6.0.1
-Suggests: testthat

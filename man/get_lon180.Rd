@@ -2,24 +2,51 @@
 % Please edit documentation in R/get_lon180.R
 \name{get_lon180}
 \alias{get_lon180}
-\title{Transforms the longitude from [0, 360] to [-180, +180]}
+\title{Transforms the Longitude from [0, 360] to [-180, +180].}
 \usage{
 get_lon180()
 }
 \description{
-Given a pair of geographic coordinates, transforms the longitude from [0,
-360] to [-180, +180].
+Given a list of geographic coordinates, test the coordinates and transforms
+the longitude from [0, 360] to [-180, +180].
 }
 \details{
-Input: a .txt file with the longitude in the first column and the latitude in
-the second column, separated by tabs. The header of the file must be
-'longitude' and 'latitude', respectively.
+\itemize{
+\item The input is a .txt file with the geographic coordinates in decimal
+degrees and the longitude in the range [0, 360]. The longitude must be in the
+first column and the latitude in the second column, separated by tabs. The
+header of the file must be 'longitude' and 'latitude', respectively.
+\item The function does the following:
+\enumerate{
+\item Opens a window to choose the input file;
+\item Tests if the longitude and latitude are out of bounds and writes a file
+with the errors, if they exist;
+\item Transforms the longitude into the range [-180, +180] and writes a file
+with the coordinate pairs.
+}
+\item Output:
+\enumerate{
+\item A .txt file named 'err_coord-get_lon180.txt' with the values out of
+bounds, if they exist;
+\item A .txt file named 'coords2functions.txt' with the longitude in the
+range [-180, +180] and the latitude, both in decimal degrees. The header is
+'longitude' and 'latitude', respectively. This file is the input of
+\code{\link{get_country}} or \code{\link{get_sea}} to determine the country
+or sea names.
+}
+}
+}
+\examples{
+\dontrun{
+##
+## A sample of coordinate pairs with the longitude in the range [0, 360],
+## extracted from the list of stations belonging to ISPD (International
+## Surface Pressure Databank).
+## Run the three lines of code below to see the example:
+##
+eg_ispd <- coords_ispd_sample
+get_lon180()
+rm(eg_ispd)
+}
 
-Opens a window, for choosing the input file that must be in the working
-directory. Verify if the longitude and latitude are valid. Transforms the
-longitude.
-
-Output: creates a .txt file <coords2getf.txt> with the transformed longitude
-and the latitude. This file is the input of \code{\link{get_country}} or
-\code{\link{get_marine}} to determine the geographic names.
 }

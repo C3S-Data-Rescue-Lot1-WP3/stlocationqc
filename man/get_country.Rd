@@ -2,48 +2,84 @@
 % Please edit documentation in R/get_country.R
 \name{get_country}
 \alias{get_country}
-\title{Determines the country names for coordinate points}
+\title{Determines Country Names for Points Located in the Continent.}
 \usage{
 get_country()
 }
 \description{
-Given a pair of geographic coordinates in the continent, determines the
-country name.
+Given a list of geographic coordinates in the continent, determines the
+country name for each coordinate point.
 }
 \details{
-Input: A text file with the coordinates in decimal degrees and a
-  shapefile with the country names.
-
-  The .txt file has to be in the following format: with the longitude in the
-  first column and the latitude in the second column, separated by tabs.The
-  header of the file must be 'longitude' and 'latitude', respectively and
-  longitude must be in the range [-180, +180].
-
-  If exists <coords2getf.txt> created by \code{\link{get_lon180}},
-  automatically loads and reads the coordinates file. If wasn't necessary to
-  use \code{\link{get_lon180}}, because the longitude was already in the
-  range [-180, +180], opens a window, for choosing the input file that must
-  be in the working directory.
-
-  Creates an 'id' with the row number, which consists of an identifier to the
-  coordinates: the 'id' is necessary to display the coordinates in the
-  initial order at the end of the process.
-
-  Output: writes the country names in <countries.txt>; writes the missing
-  name points (if they exist) in <countries_na.txt>, which is the input of
-  \code{\link{get_marine}}; writes a processing report in
-  <report_get_country.txt>.
+\itemize{
+\item The input is a .txt file with the geographic coordinates in decimal
+degrees and the longitude in the range [-180, +180]. The longitude must be in
+the first column and the latitude in the second column, separated by tabs.
+The header of the file must be 'longitude' and 'latitude', respectively.
+\item Note that this function was tested for a maximum value of 84.000 pairs
+of coordinates. Loading larger files will likely cause a long processing time
+or memory problems.
+\item The function does the following:
+\enumerate{
+\item Reads the output file of \code{\link{get_lon180}} function
+('coords2functions.txt'), if exists;
+\item Else if, the longitude is already in the range [-180, +180], opens a
+window to choose the input file which must be formatted according to the
+instructions above;
+\item Creates an 'id' with the row number, which consists of an identifier to
+the coordinates: the 'id' is necessary to display the coordinates in the
+initial order at the end of the process;
+\item Tests if the longitude and latitude are out of bounds and writes a file
+with the errors, if they exist;
+\item Uses a SpatialPolygonsDataFrame with the polygons and names of
+administrative regions. Uses functions from sp package to handle the
+SpatialPolygonsDataFrame and determine the country names;
+\item Writes a file with points and their administrative region names and
+another file with points that remain unnamed (if they exist). Also writes a
+report about the points processed.
+}
+\item Output:
+\enumerate{
+\item A .txt file named 'err_coord-get_country.txt' with the coordinates out
+of bounds, if they exist;
+\item A .txt file named 'countries.txt'. The header is: 'id'  'longitude'
+'latitude'  'country';
+\item A .txt file named 'countries_na.txt' with the points unnamed, if they
+exist. This file is the input of \code{\link{get_sea}} to determine the sea
+names;
+\item A .txt file named 'report_get_country.txt'.
+}
+}
 }
 \examples{
-E.g. the Portuguese territory
-If the point is in Continental Portugal
-attributes the name 'Portugal'
-If the point is in the Portuguese
-islands Azores or Madeira
-which are the two Autonomous Regions
-of the Portuguese sovereign
-attributes 'Azores' and 'Madeira'
-respectively.
+\dontrun{
+##
+## Example 1:
+## A sample of coordinate pairs with the longitude in the range [-180, +180],
+## extracted from the list of stations belonging to ERACLIM upper-air
+## inventory.
+## Run the three lines of code below to see the example:
+##
+eg_upperair <- coords_upperair_sample
+get_country()
+rm(eg_upperair)
+##
+## Example 2:
+## A sample of coordinate pairs with the longitude in the range [-180, +180],
+## extracted from the list of stations belonging to MEDARE.
+## Run the three lines of code below to see the example:
+##
+eg_medare <- coords_medare_sample
+get_country()
+rm(eg_medare)
+##
+## About the definition of 'country name':
+## Considering the Portuguese territory, if the point is in Continental
+## Portugal, attributes the name 'Portugal'. If the point is in the
+## Portuguese islands Azores or Madeira, which are the two Autonomous
+## Regions of the Portuguese Sovereign, attributes the name 'Azores' and
+## 'Madeira', respectively.
+}
 
 }
 \references{
@@ -52,7 +88,7 @@ respectively.
   on 2017-11-15.
 }
 \seealso{
-Requires \code{\link[rgdal]{readOGR}},
-  \code{\link[sp]{SpatialPoints}} and \code{\link[sp]{over}} to determine the
+Requires \code{\link[sp]{SpatialPoints}},
+  \code{\link[sp]{CRS-class}}, and \code{\link[sp]{over}} to determine the
   country names.
 }

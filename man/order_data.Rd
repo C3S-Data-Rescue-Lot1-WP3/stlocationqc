@@ -2,13 +2,37 @@
 % Please edit documentation in R/3_order_data.R
 \name{order_data}
 \alias{order_data}
-\title{Reorder the data by the coordinate pairs inicial order}
+\title{Reorder the Data by the Coordinate Pairs Inicial Order.}
 \usage{
 order_data()
 }
 \description{
-Concatenate all the files with country names and/or marine region names, i.
-e, the output of \code{\link{get_country}}, \code{\link{get_marine}} and
+Concatenate all the files with country names and/or sea names, i. e, the
+output of \code{\link{get_country}}, \code{\link{get_sea}} and
 \code{\link{get_country_sea}} and reorder the data by the coordinate pairs
 inicial order.
+}
+\details{
+\itemize{
+\item The input are the files 'countries.txt', 'seas.txt' and
+'countries_seas.txt', created by the functions \code{\link{get_country}},
+\code{\link{get_sea}} and \code{\link{get_country_sea}}, respectively.
+However, only requires one or two of the files;
+\item The function changes the name of the last column of each input file to
+'geo_name' and then orders the data by the 'id' column;
+\item The output is a .txt file named 'geographic_names.txt' with the
+coordinate pairs by the inicial order. The header is: 'id' 'longitude'
+'latitude' 'geo_name'.
+}
+}
+\examples{
+\dontrun{
+##
+## Execute one of the examples of \\code{\\link{get_country}} and then run the
+## three functions below sequentially:
+get_sea()
+get_country_sea()
+order_data()
+}
+
 }
