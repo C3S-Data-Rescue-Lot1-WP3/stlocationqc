@@ -1,4 +1,3 @@
-longitude	latitude 
 1.4	41.6
 1.98	41.48
 3.07	30.55
