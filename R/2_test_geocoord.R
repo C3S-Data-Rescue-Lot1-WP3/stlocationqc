@@ -107,7 +107,7 @@ test_geocoord <- function(coords = NULL) {
     cat("directory.\n\n")
     # Output with errors
   } else {
-    # Correct and transformed coordinates
+    # Correct coordinates
     write.table(coords_ok, file = "coords_ok.txt", row.names = FALSE,
       col.names = TRUE, sep = "\t", quote = FALSE)
     # Erroneous coordinates
