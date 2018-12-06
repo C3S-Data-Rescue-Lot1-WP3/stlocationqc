@@ -52,10 +52,12 @@ countries_polys <- function() {
   # Reads the data into a SpatialPolygonsDataFrame (R object from the "sp"
   # package)
   coun10_sp <- rgdal::readOGR(dsn = tempdir(),
-    layer = "ne_10m_admin_0_countries")
+    layer = "ne_10m_admin_0_countries", stringsAsFactors = FALSE,
+    encoding = "UTF-8", use_iconv = TRUE)
   cat("\n")
   coun50_sp <- rgdal::readOGR(dsn = tempdir(),
-    layer = "ne_50m_admin_0_countries")
+    layer = "ne_50m_admin_0_countries", stringsAsFactors = FALSE,
+    encoding = "UTF-8", use_iconv = TRUE)
   # View the field names in the shapefile attribute table
   # names(coun10_sp)
   # names(coun50_sp)
@@ -68,28 +70,28 @@ countries_polys <- function() {
   countries_polys_10m <- coun10_sp[, nec_fields]
   countries_polys_50m <- coun50_sp[, nec_fields]
   # Saves the SpatialPolygonsDataFrames as .RData
-  # if (!file.exists("data")) {
-  #   dir.create("data")
-  # }
+  if (!file.exists("polys")) {
+    dir.create("polys")
+  }
   # Too big to be included in the package datasets
   # Has to be downloaded be the user
-  # devtools::use_data(countries_polys_10m, overwrite = TRUE)
-  save(countries_polys_10m, file = "countries_polys_10m.RData")
+  # devtools::use_data(countries_polys_10m, overwrite = TRUE, compress = "xz")
+  save(countries_polys_10m, file = "polys/countries_polys_10m.rda")
   cat("\n")
   cat("A spatial object with the countries polygons of 10 m precision as \n")
-  cat("been created and saved in the current working directory as \n")
-  cat("'countries_polys_10m.RData'.\n")
+  cat("been created and saved in the 'polys' directory as \n")
+  cat("'countries_polys_10m.rda'.\n")
   print(class(countries_polys_10m))
   cat("Extension of the object (longitude, latitude):\n")
   print(countries_polys_10m@bbox)
   # cat("\n Coordinate reference system:\n")
   # print(countries_polys_10m@proj4string)
-  # devtools::use_data(countries_polys_50m, overwrite = TRUE)
-  save(countries_polys_50m, file = "countries_polys_50m.RData")
+  # devtools::use_data(countries_polys_50m, overwrite = TRUE, compress = "xz")
+  save(countries_polys_50m, file = "polys/countries_polys_50m.rda")
   cat("\n")
   cat("A spatial object with the countries polygons of 50 m precision as \n")
-  cat("been created and saved in the current working directory as \n")
-  cat("'countries_polys_50m.RData'.\n")
+  cat("been created and saved in the 'polys' directory as \n")
+  cat("'countries_polys_50m.rda'.\n")
   print(class(countries_polys_50m))
   cat("Extension of the object (longitude, latitude):\n")
   print(countries_polys_50m@bbox)

@@ -13,7 +13,8 @@ test_geocoord(coords = NULL)
 \arguments{
 \item{coords}{data frame with the geographic coordinates in decimal degrees,
 the longitude in the first column, the latitude in the second column and
-the column names: \strong{lon | lat}.}
+the column names: \strong{lon | lat} (other columns can exist, however are
+unnecessary for this function).}
 }
 \description{
 Given a list of geographic coordinates, tests if the longitude is in the
@@ -26,7 +27,7 @@ the coordinates for missing values.
 \item A text file without header with the geographic coordinates in decimal
 degrees: the longitude in the first column and the latitude in the
 second column, separated by tabs. Missing values must be codified as
-'-999.0'.
+'NA' in all fields.
 \item Or a data frame with that same format and the column names: \strong{lon
 | lat}.
 }
@@ -50,7 +51,7 @@ determine the country or the sea names. Eventually is created the data frame
 \examples{
 \dontrun{
 ##
-test_geocoord(coords = coords_sample) # CRIAR O OBJECTO coords_sample!!!!
+test_geocoord(coords = eraclim_uao_fp)
 }
 
 }
