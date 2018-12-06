@@ -61,9 +61,9 @@ located.
 ## inventory and MEDARE - MEditerranean climate DAta REscue
 ##
 ## First run
-get_lon180(coords_lon360)
+get_lon180(coords = ispd)
 ## Or
-test_geocoord(coords_sample)
+test_geocoord(coords = eraclim_uao_fp)
 ## Then run
 get_country(icoords)
 }

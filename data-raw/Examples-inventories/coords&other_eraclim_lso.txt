@@ -1,0 +1,368 @@
+-23.52	14.9	Cape Verde	85890	Africa	34	Cidade_da_Praia
+-23.52	14.9	Cape Verde	85890	Africa	34	Cidade_da_Praia
+-23.52	14.9	Cape Verde	85890	Africa	34	Cidade_da_Praia
+-23.52	14.9	Cape Verde	85890	Africa	34	Cidade_da_Praia
+-23.52	14.9	Cape Verde	85890	Africa	34	Cidade_da_Praia
+-23.52	14.9	Cape Verde	85890	Africa	34	Cidade_da_Praia
+-23.52	14.9	Cape Verde	85890	Africa	34	Cidade_da_Praia
+-23.52	14.9	Cape Verde	85890	Africa	34	Cidade_da_Praia
+-25.07	16.9	Cape Verde	85830	Africa	11	Mindelo
+-25.07	16.9	Cape Verde	85830	Africa	11	Mindelo
+-25.07	16.9	Cape Verde	85830	Africa	11	Mindelo
+-25.07	16.9	Cape Verde	85830	Africa	11	Mindelo
+-25.07	16.9	Cape Verde	85830	Africa	11	Mindelo
+-25.07	16.9	Cape Verde	85830	Africa	11	Mindelo
+-25.07	16.9	Cape Verde	85830	Africa	11	Mindelo
+-25.07	16.9	Cape Verde	85830	Africa	11	Mindelo
+-15.43	11.57	Guiné-Bissau	617690	Africa	19	Bolama
+-15.43	11.57	Guiné-Bissau	617690	Africa	19	Bolama
+-15.43	11.57	Guiné-Bissau	617690	Africa	19	Bolama
+-15.43	11.57	Guiné-Bissau	617690	Africa	19	Bolama
+-15.43	11.57	Guiné-Bissau	617690	Africa	19	Bolama
+-15.43	11.57	Guiné-Bissau	617690	Africa	19	Bolama
+-15.43	11.57	Guiné-Bissau	617690	Africa	19	Bolama
+-15.43	11.57	Guiné-Bissau	617690	Africa	19	Bolama
+-15.43	11.57	Guiné-Bissau	617690	Africa	19	Bolama
+-15.43	11.57	Guiné-Bissau	617690	Africa	19	Bolama
+-15.43	11.57	Guiné-Bissau	617690	Africa	19	Bolama
+-15.43	11.57	Guiné-Bissau	617690	Africa	19	Bolama
+-15.43	11.57	Guiné-Bissau	617690	Africa	19	Bolama
+6.74	0.35	São Tomé e Principe	619310	Africa	5	São_Tomé
+6.74	0.35	São Tomé e Principe	619310	Africa	5	São_Tomé
+6.74	0.35	São Tomé e Principe	619310	Africa	5	São_Tomé
+6.74	0.35	São Tomé e Principe	619310	Africa	5	São_Tomé
+6.74	0.35	São Tomé e Principe	619310	Africa	5	São_Tomé
+6.74	0.35	São Tomé e Principe	619310	Africa	5	São_Tomé
+6.74	0.35	São Tomé e Principe	619310	Africa	5	São_Tomé
+6.74	0.35	São Tomé e Principe	619310	Africa	5	São_Tomé
+13.22	-8.81	Angola	661600	Africa	45.78	Luanda(João_Capelo)/Angola
+13.22	-8.81	Angola	661600	Africa	45.78	Luanda(João_Capelo)/Angola
+13.22	-8.81	Angola	661600	Africa	45.78	Luanda(João_Capelo)/Angola
+13.22	-8.81	Angola	661600	Africa	45.78	Luanda(João_Capelo)/Angola
+13.22	-8.81	Angola	661600	Africa	45.78	Luanda(João_Capelo)/Angola
+13.22	-8.81	Angola	661600	Africa	45.78	Luanda(João_Capelo)/Angola
+13.22	-8.81	Angola	661600	Africa	45.78	Luanda(João_Capelo)/Angola
+13.22	-8.81	Angola	661600	Africa	45.78	Luanda(João_Capelo)/Angola
+13.22	-8.81	Angola	661600	Africa	45.78	Luanda(João_Capelo)/Angola
+13.22	-8.81	Angola	661600	Africa	45.78	Luanda(João_Capelo)/Angola
+13.22	-8.81	Angola	661600	Africa	45.78	Luanda(João_Capelo)/Angola
+13.22	-8.81	Angola	661600	Africa	45.78	Luanda(João_Capelo)/Angola
+13.22	-8.81	Angola	661600	Africa	45.78	Luanda(João_Capelo)/Angola
+14.73	-6.48	Angola	NA	Africa	562	S.Salvador_do_Congo
+14.73	-6.48	Angola	NA	Africa	562	S.Salvador_do_Congo
+14.73	-6.48	Angola	NA	Africa	562	S.Salvador_do_Congo
+14.73	-6.48	Angola	NA	Africa	562	S.Salvador_do_Congo
+14.73	-6.48	Angola	NA	Africa	562	S.Salvador_do_Congo
+14.73	-6.48	Angola	NA	Africa	562	S.Salvador_do_Congo
+14.73	-6.48	Angola	NA	Africa	562	S.Salvador_do_Congo
+14.73	-6.48	Angola	NA	Africa	562	S.Salvador_do_Congo
+12.15	-15.2	Angola	664220	Africa	12.5	Moçâmedes
+12.15	-15.2	Angola	664220	Africa	12.5	Moçâmedes
+12.15	-15.2	Angola	664220	Africa	12.5	Moçâmedes
+12.15	-15.2	Angola	664220	Africa	12.5	Moçâmedes
+12.15	-15.2	Angola	664220	Africa	12.5	Moçâmedes
+12.15	-15.2	Angola	664220	Africa	12.5	Moçâmedes
+12.15	-15.2	Angola	664220	Africa	12.5	Moçâmedes
+12.15	-15.2	Angola	664220	Africa	12.5	Moçâmedes
+12.15	-15.2	Angola	664220	Africa	12.5	Moçâmedes
+12.15	-15.2	Angola	664220	Africa	12.5	Moçâmedes
+12.15	-15.2	Angola	664220	Africa	12.5	Moçâmedes
+12.15	-15.2	Angola	664220	Africa	12.5	Moçâmedes
+12.15	-15.2	Angola	664220	Africa	12.5	Moçâmedes
+32.6	-25.48	Mozambique	673410	Africa	59	Lourenço_Marques( WMO station name Mavalane)
+32.6	-25.48	Mozambique	673410	Africa	59	Lourenço_Marques( WMO station name Mavalane)
+32.6	-25.48	Mozambique	673410	Africa	59	Lourenço_Marques( WMO station name Mavalane)
+32.6	-25.48	Mozambique	673410	Africa	59	Lourenço_Marques( WMO station name Mavalane)
+32.6	-25.48	Mozambique	673410	Africa	59	Lourenço_Marques( WMO station name Mavalane)
+32.6	-25.48	Mozambique	673410	Africa	59	Lourenço_Marques( WMO station name Mavalane)
+32.6	-25.48	Mozambique	673410	Africa	59	Lourenço_Marques( WMO station name Mavalane)
+32.6	-25.48	Mozambique	673410	Africa	59	Lourenço_Marques( WMO station name Mavalane)
+32.6	-25.48	Mozambique	673410	Africa	59	Lourenço_Marques( WMO station name Mavalane)
+32.6	-25.48	Mozambique	673410	Africa	59	Lourenço_Marques( WMO station name Mavalane)
+32.6	-25.48	Mozambique	673410	Africa	59	Lourenço_Marques( WMO station name Mavalane)
+32.6	-25.48	Mozambique	673410	Africa	59	Lourenço_Marques( WMO station name Mavalane)
+32.6	-25.48	Mozambique	673410	Africa	59	Lourenço_Marques( WMO station name Mavalane)
+34.85	-19.25	Mozambique	672970	Africa	7	Beira
+34.85	-19.25	Mozambique	672970	Africa	7	Beira
+34.85	-19.25	Mozambique	672970	Africa	7	Beira
+34.85	-19.25	Mozambique	672970	Africa	7	Beira
+34.85	-19.25	Mozambique	672970	Africa	7	Beira
+34.85	-19.25	Mozambique	672970	Africa	7	Beira
+34.85	-19.25	Mozambique	672970	Africa	7	Beira
+34.85	-19.25	Mozambique	672970	Africa	7	Beira
+34.85	-19.25	Mozambique	672970	Africa	7	Beira
+34.85	-19.25	Mozambique	672970	Africa	7	Beira
+34.85	-19.25	Mozambique	672970	Africa	7	Beira
+34.85	-19.25	Mozambique	672970	Africa	7	Beira
+34.85	-19.25	Mozambique	672970	Africa	7	Beira
+35.38	-23.88	Mozambique	673230	Africa	14	Inhambane
+35.38	-23.88	Mozambique	673230	Africa	14	Inhambane
+35.38	-23.88	Mozambique	673230	Africa	14	Inhambane
+35.38	-23.88	Mozambique	673230	Africa	14	Inhambane
+35.38	-23.88	Mozambique	673230	Africa	14	Inhambane
+35.38	-23.88	Mozambique	673230	Africa	14	Inhambane
+35.38	-23.88	Mozambique	673230	Africa	14	Inhambane
+35.38	-23.88	Mozambique	673230	Africa	14	Inhambane
+35.38	-23.88	Mozambique	673230	Africa	14	Inhambane
+35.38	-23.88	Mozambique	673230	Africa	14	Inhambane
+35.38	-23.88	Mozambique	673230	Africa	14	Inhambane
+35.38	-23.88	Mozambique	673230	Africa	14	Inhambane
+35.38	-23.88	Mozambique	673230	Africa	14	Inhambane
+36.88	-17.88	Mozambique	672830	Africa	6	Quelimane
+36.88	-17.88	Mozambique	672830	Africa	6	Quelimane
+36.88	-17.88	Mozambique	672830	Africa	6	Quelimane
+36.88	-17.88	Mozambique	672830	Africa	6	Quelimane
+36.88	-17.88	Mozambique	672830	Africa	6	Quelimane
+36.88	-17.88	Mozambique	672830	Africa	6	Quelimane
+36.88	-17.88	Mozambique	672830	Africa	6	Quelimane
+36.88	-17.88	Mozambique	672830	Africa	6	Quelimane
+36.88	-17.88	Mozambique	672830	Africa	6	Quelimane
+36.88	-17.88	Mozambique	672830	Africa	6	Quelimane
+36.88	-17.88	Mozambique	672830	Africa	6	Quelimane
+36.88	-17.88	Mozambique	672830	Africa	6	Quelimane
+36.88	-17.88	Mozambique	672830	Africa	6	Quelimane
+40.67	-14.95	Mozambique	NA	Africa	15	Mossuril
+40.67	-14.95	Mozambique	NA	Africa	15	Mossuril
+40.67	-14.95	Mozambique	NA	Africa	15	Mossuril
+40.67	-14.95	Mozambique	NA	Africa	15	Mossuril
+40.67	-14.95	Mozambique	NA	Africa	15	Mossuril
+40.67	-14.95	Mozambique	NA	Africa	15	Mossuril
+40.67	-14.95	Mozambique	NA	Africa	15	Mossuril
+40.67	-14.95	Mozambique	NA	Africa	15	Mossuril
+40.67	-14.95	Mozambique	NA	Africa	15	Mossuril
+40.67	-14.95	Mozambique	NA	Africa	15	Mossuril
+40.67	-14.95	Mozambique	NA	Africa	15	Mossuril
+40.67	-14.95	Mozambique	NA	Africa	15	Mossuril
+40.67	-14.95	Mozambique	NA	Africa	15	Mossuril
+40.53	-13.1	Mozambique	NA	Africa	60	Porto_Amélia
+40.53	-13.1	Mozambique	NA	Africa	60	Porto_Amélia
+40.53	-13.1	Mozambique	NA	Africa	60	Porto_Amélia
+40.53	-13.1	Mozambique	NA	Africa	60	Porto_Amélia
+40.53	-13.1	Mozambique	NA	Africa	60	Porto_Amélia
+40.53	-13.1	Mozambique	NA	Africa	60	Porto_Amélia
+40.53	-13.1	Mozambique	NA	Africa	60	Porto_Amélia
+40.53	-13.1	Mozambique	NA	Africa	60	Porto_Amélia
+40.53	-13.1	Mozambique	NA	Africa	60	Porto_Amélia
+40.53	-13.1	Mozambique	NA	Africa	60	Porto_Amélia
+40.53	-13.1	Mozambique	NA	Africa	60	Porto_Amélia
+40.53	-13.1	Mozambique	NA	Africa	60	Porto_Amélia
+40.53	-13.1	Mozambique	NA	Africa	60	Porto_Amélia
+73.8	15.48	India	431920	Asia	60	Nova_Goa
+73.8	15.48	India	431920	Asia	60	Nova_Goa
+73.8	15.48	India	431920	Asia	60	Nova_Goa
+73.8	15.48	India	431920	Asia	60	Nova_Goa
+73.8	15.48	India	431920	Asia	60	Nova_Goa
+73.8	15.48	India	431920	Asia	60	Nova_Goa
+73.8	15.48	India	431920	Asia	60	Nova_Goa
+73.8	15.48	India	431920	Asia	60	Nova_Goa
+73.8	15.48	India	431920	Asia	60	Nova_Goa
+73.8	15.48	India	431920	Asia	60	Nova_Goa
+73.8	15.48	India	431920	Asia	60	Nova_Goa
+73.8	15.48	India	431920	Asia	60	Nova_Goa
+73.8	15.48	India	431920	Asia	60	Nova_Goa
+113.55	22.2	China	450110	Asia	65	Macau
+113.55	22.2	China	450110	Asia	65	Macau
+113.55	22.2	China	450110	Asia	65	Macau
+113.55	22.2	China	450110	Asia	65	Macau
+113.55	22.2	China	450110	Asia	65	Macau
+113.55	22.2	China	450110	Asia	65	Macau
+113.55	22.2	China	450110	Asia	65	Macau
+113.55	22.2	China	450110	Asia	65	Macau
+113.55	22.2	China	450110	Asia	65	Macau
+113.55	22.2	China	450110	Asia	65	Macau
+113.55	22.2	China	450110	Asia	65	Macau
+113.55	22.2	China	450110	Asia	65	Macau
+113.55	22.2	China	450110	Asia	65	Macau
+113.55	22.2	China	450110	Asia	66	Macau
+113.55	22.2	China	450110	Asia	66	Macau
+113.55	22.2	China	450110	Asia	66	Macau
+113.55	22.2	China	450110	Asia	67	Macau
+113.55	22.2	China	450110	Asia	67	Macau
+113.55	22.2	China	450110	Asia	67	Macau
+125.58	-8.58	East Timor	973900	South-West Pacific	4	Dili
+125.58	-8.58	East Timor	973900	South-West Pacific	4	Dili
+125.58	-8.58	East Timor	973900	South-West Pacific	4	Dili
+125.58	-8.58	East Timor	973900	South-West Pacific	4	Dili
+125.58	-8.58	East Timor	973900	South-West Pacific	4	Dili
+125.58	-8.58	East Timor	973900	South-West Pacific	4	Dili
+125.58	-8.58	East Timor	973900	South-West Pacific	4	Dili
+125.37	-8.78	East Timor	NA	South-West Pacific	450	Hato-Lia
+125.37	-8.78	East Timor	NA	South-West Pacific	450	Hato-Lia
+125.37	-8.78	East Timor	NA	South-West Pacific	450	Hato-Lia
+125.37	-8.78	East Timor	NA	South-West Pacific	450	Hato-Lia
+125.37	-8.78	East Timor	NA	South-West Pacific	450	Hato-Lia
+126.13	-8.5	East Timor	NA	South-West Pacific	4	Manatuto
+126.13	-8.5	East Timor	NA	South-West Pacific	4	Manatuto
+126.13	-8.5	East Timor	NA	South-West Pacific	4	Manatuto
+126.13	-8.5	East Timor	NA	South-West Pacific	4	Manatuto
+126.13	-8.5	East Timor	NA	South-West Pacific	4	Manatuto
+13.22	-8.81	Angola	66160	Africa	42	Luanda(João_Capelo)/Angola
+13.22	-8.81	Angola	66160	Africa	42	Luanda(João_Capelo)/Angola
+13.22	-8.81	Angola	66160	Africa	42	Luanda(João_Capelo)/Angola
+13.22	-8.81	Angola	66160	Africa	42	Luanda(João_Capelo)/Angola
+13.22	-8.81	Angola	66160	Africa	42	Luanda(João_Capelo)/Angola
+13.22	-8.81	Angola	66160	Africa	42	Luanda(João_Capelo)/Angola
+13.22	-8.81	Angola	66160	Africa	42	Luanda(João_Capelo)/Angola
+13.22	-8.81	Angola	66160	Africa	42	Luanda(João_Capelo)/Angola
+12.15	-15.2	Angola	66422	Africa	3	Moçâmedes
+12.15	-15.2	Angola	66422	Africa	3	Moçâmedes
+12.15	-15.2	Angola	66422	Africa	3	Moçâmedes
+12.15	-15.2	Angola	66422	Africa	3	Moçâmedes
+12.15	-15.2	Angola	66422	Africa	3	Moçâmedes
+12.15	-15.2	Angola	66422	Africa	3	Moçâmedes
+12.15	-15.2	Angola	66422	Africa	3	Moçâmedes
+12.15	-15.2	Angola	66422	Africa	3	Moçâmedes
+12.18	-5.55	Angola	NA	Africa	30	Cabinda
+12.18	-5.55	Angola	NA	Africa	30	Cabinda
+12.18	-5.55	Angola	NA	Africa	30	Cabinda
+12.18	-5.55	Angola	NA	Africa	30	Cabinda
+12.18	-5.55	Angola	NA	Africa	30	Cabinda
+12.18	-5.55	Angola	NA	Africa	30	Cabinda
+12.18	-5.55	Angola	NA	Africa	30	Cabinda
+12.18	-5.55	Angola	NA	Africa	30	Cabinda
+20.83	-7.37	Angola	66152	Africa	745	Dundo
+20.83	-7.37	Angola	66152	Africa	745	Dundo
+20.83	-7.37	Angola	66152	Africa	745	Dundo
+20.83	-7.37	Angola	66152	Africa	745	Dundo
+20.83	-7.37	Angola	66152	Africa	745	Dundo
+20.83	-7.37	Angola	66152	Africa	745	Dundo
+20.83	-7.37	Angola	66152	Africa	745	Dundo
+20.83	-7.37	Angola	66152	Africa	745	Dundo
+16.37	-9.33	Angola	NA	Africa	1145	Malange
+16.37	-9.33	Angola	NA	Africa	1145	Malange
+16.37	-9.33	Angola	NA	Africa	1145	Malange
+16.37	-9.33	Angola	NA	Africa	1145	Malange
+16.37	-9.33	Angola	NA	Africa	1145	Malange
+16.37	-9.33	Angola	NA	Africa	1145	Malange
+16.37	-9.33	Angola	NA	Africa	1145	Malange
+16.37	-9.33	Angola	NA	Africa	1145	Malange
+19.92	-11.78	Angola	66285	Africa	1320	Vila_Luso
+19.92	-11.78	Angola	66285	Africa	1320	Vila_Luso
+19.92	-11.78	Angola	66285	Africa	1320	Vila_Luso
+19.92	-11.78	Angola	66285	Africa	1320	Vila_Luso
+19.92	-11.78	Angola	66285	Africa	1320	Vila_Luso
+19.92	-11.78	Angola	66285	Africa	1320	Vila_Luso
+19.92	-11.78	Angola	66285	Africa	1320	Vila_Luso
+19.92	-11.78	Angola	66285	Africa	1320	Vila_Luso
+13.53	-12.37	Angola	NA	Africa	1	Lobito
+13.53	-12.37	Angola	NA	Africa	1	Lobito
+13.53	-12.37	Angola	NA	Africa	1	Lobito
+13.53	-12.37	Angola	NA	Africa	1	Lobito
+13.53	-12.37	Angola	NA	Africa	1	Lobito
+13.53	-12.37	Angola	NA	Africa	1	Lobito
+13.53	-12.37	Angola	NA	Africa	1	Lobito
+13.53	-12.37	Angola	NA	Africa	1	Lobito
+15.75	-12.8	Angola	66318	Africa	1700	Nova_Lisboa
+15.75	-12.8	Angola	66318	Africa	1700	Nova_Lisboa
+15.75	-12.8	Angola	66318	Africa	1700	Nova_Lisboa
+15.75	-12.8	Angola	66318	Africa	1700	Nova_Lisboa
+15.75	-12.8	Angola	66318	Africa	1700	Nova_Lisboa
+15.75	-12.8	Angola	66318	Africa	1700	Nova_Lisboa
+15.75	-12.8	Angola	66318	Africa	1700	Nova_Lisboa
+15.75	-12.8	Angola	66318	Africa	1700	Nova_Lisboa
+13.5	-14.88	Angola	66390	Africa	1826	Sá_da_Bandeira
+13.5	-14.88	Angola	66390	Africa	1826	Sá_da_Bandeira
+13.5	-14.88	Angola	66390	Africa	1826	Sá_da_Bandeira
+13.5	-14.88	Angola	66390	Africa	1826	Sá_da_Bandeira
+13.5	-14.88	Angola	66390	Africa	1826	Sá_da_Bandeira
+13.5	-14.88	Angola	66390	Africa	1826	Sá_da_Bandeira
+13.5	-14.88	Angola	66390	Africa	1826	Sá_da_Bandeira
+13.5	-14.88	Angola	66390	Africa	1826	Sá_da_Bandeira
+20.35	-15.83	Angola	66447	Africa	1188	Mavinga
+20.35	-15.83	Angola	66447	Africa	1188	Mavinga
+20.35	-15.83	Angola	66447	Africa	1188	Mavinga
+20.35	-15.83	Angola	66447	Africa	1188	Mavinga
+20.35	-15.83	Angola	66447	Africa	1188	Mavinga
+20.35	-15.83	Angola	66447	Africa	1188	Mavinga
+20.35	-15.83	Angola	66447	Africa	1188	Mavinga
+20.35	-15.83	Angola	66447	Africa	1188	Mavinga
+32.57	-25.92	Mozambique	67341	Africa	39	Lourenço_Marques( WMO station name Mavalane)
+32.57	-25.92	Mozambique	67341	Africa	39	Lourenço_Marques( WMO station name Mavalane)
+32.57	-25.92	Mozambique	67341	Africa	39	Lourenço_Marques( WMO station name Mavalane)
+32.57	-25.92	Mozambique	67341	Africa	39	Lourenço_Marques( WMO station name Mavalane)
+32.57	-25.92	Mozambique	67341	Africa	39	Lourenço_Marques( WMO station name Mavalane)
+32.57	-25.92	Mozambique	67341	Africa	39	Lourenço_Marques( WMO station name Mavalane)
+32.57	-25.92	Mozambique	67341	Africa	39	Lourenço_Marques( WMO station name Mavalane)
+32.57	-25.92	Mozambique	67341	Africa	39	Lourenço_Marques( WMO station name Mavalane)
+32.57	-25.92	Mozambique	67341	Africa	39	Lourenço_Marques( WMO station name Mavalane)
+32.57	-25.92	Mozambique	67341	Africa	39	Lourenço_Marques( WMO station name Mavalane)
+34.85	-19.25	Mozambique	67297	Africa	7	Beira
+34.85	-19.25	Mozambique	67297	Africa	7	Beira
+34.85	-19.25	Mozambique	67297	Africa	7	Beira
+34.85	-19.25	Mozambique	67297	Africa	7	Beira
+34.85	-19.25	Mozambique	67297	Africa	7	Beira
+34.85	-19.25	Mozambique	67297	Africa	7	Beira
+34.85	-19.25	Mozambique	67297	Africa	7	Beira
+34.85	-19.25	Mozambique	67297	Africa	7	Beira
+34.85	-19.25	Mozambique	67297	Africa	7	Beira
+34.85	-19.25	Mozambique	67297	Africa	7	Beira
+35.38	-23.88	Mozambique	67323	Africa	14	Inhambane
+35.38	-23.88	Mozambique	67323	Africa	14	Inhambane
+35.38	-23.88	Mozambique	67323	Africa	14	Inhambane
+35.38	-23.88	Mozambique	67323	Africa	14	Inhambane
+35.38	-23.88	Mozambique	67323	Africa	14	Inhambane
+35.38	-23.88	Mozambique	67323	Africa	14	Inhambane
+35.38	-23.88	Mozambique	67323	Africa	14	Inhambane
+35.38	-23.88	Mozambique	67323	Africa	14	Inhambane
+35.38	-23.88	Mozambique	67323	Africa	14	Inhambane
+35.38	-23.88	Mozambique	67323	Africa	14	Inhambane
+36.88	-17.88	Mozambique	67283	Africa	6	Quelimane
+36.88	-17.88	Mozambique	67283	Africa	6	Quelimane
+36.88	-17.88	Mozambique	67283	Africa	6	Quelimane
+36.88	-17.88	Mozambique	67283	Africa	6	Quelimane
+36.88	-17.88	Mozambique	67283	Africa	6	Quelimane
+36.88	-17.88	Mozambique	67283	Africa	6	Quelimane
+36.88	-17.88	Mozambique	67283	Africa	6	Quelimane
+36.88	-17.88	Mozambique	67283	Africa	6	Quelimane
+36.88	-17.88	Mozambique	67283	Africa	6	Quelimane
+36.88	-17.88	Mozambique	67283	Africa	6	Quelimane
+40.67	-14.95	Mozambique	NA	Africa	15	Mossuril
+40.67	-14.95	Mozambique	NA	Africa	15	Mossuril
+40.67	-14.95	Mozambique	NA	Africa	15	Mossuril
+40.67	-14.95	Mozambique	NA	Africa	15	Mossuril
+40.67	-14.95	Mozambique	NA	Africa	15	Mossuril
+40.67	-14.95	Mozambique	NA	Africa	15	Mossuril
+40.67	-14.95	Mozambique	NA	Africa	15	Mossuril
+40.67	-14.95	Mozambique	NA	Africa	15	Mossuril
+40.67	-14.95	Mozambique	NA	Africa	15	Mossuril
+40.67	-14.95	Mozambique	NA	Africa	15	Mossuril
+40.5	-12.57	Mozambique	NA	Africa	55	Murrebue
+40.5	-12.57	Mozambique	NA	Africa	55	Murrebue
+40.5	-12.57	Mozambique	NA	Africa	55	Murrebue
+40.5	-12.57	Mozambique	NA	Africa	55	Murrebue
+40.5	-12.57	Mozambique	NA	Africa	55	Murrebue
+40.5	-12.57	Mozambique	NA	Africa	55	Murrebue
+40.5	-12.57	Mozambique	NA	Africa	55	Murrebue
+40.5	-12.57	Mozambique	NA	Africa	55	Murrebue
+40.5	-12.57	Mozambique	NA	Africa	55	Murrebue
+40.5	-12.57	Mozambique	NA	Africa	55	Murrebue
+33.92	-16.18	Mozambique	67261	Africa	139	Tete
+33.92	-16.18	Mozambique	67261	Africa	139	Tete
+33.92	-16.18	Mozambique	67261	Africa	139	Tete
+33.92	-16.18	Mozambique	67261	Africa	139	Tete
+33.92	-16.18	Mozambique	67261	Africa	139	Tete
+33.92	-16.18	Mozambique	67261	Africa	139	Tete
+33.92	-16.18	Mozambique	67261	Africa	139	Tete
+33.92	-16.18	Mozambique	67261	Africa	139	Tete
+33.92	-16.18	Mozambique	67261	Africa	139	Tete
+33.92	-16.18	Mozambique	67261	Africa	139	Tete
+35.23	-13.3	Mozambique	NA	Africa	1357	Vila_Cabral
+35.23	-13.3	Mozambique	NA	Africa	1357	Vila_Cabral
+35.23	-13.3	Mozambique	NA	Africa	1357	Vila_Cabral
+35.23	-13.3	Mozambique	NA	Africa	1357	Vila_Cabral
+35.23	-13.3	Mozambique	NA	Africa	1357	Vila_Cabral
+35.23	-13.3	Mozambique	NA	Africa	1357	Vila_Cabral
+35.23	-13.3	Mozambique	NA	Africa	1357	Vila_Cabral
+35.23	-13.3	Mozambique	NA	Africa	1357	Vila_Cabral
+35.23	-13.3	Mozambique	NA	Africa	1357	Vila_Cabral
+35.23	-13.3	Mozambique	NA	Africa	1357	Vila_Cabral
+40.67	-15.03	Mozambique	67241	Africa	14	Lumbo
+40.67	-15.03	Mozambique	67241	Africa	14	Lumbo
+40.67	-15.03	Mozambique	67241	Africa	14	Lumbo
+40.67	-15.03	Mozambique	67241	Africa	14	Lumbo
+40.67	-15.03	Mozambique	67241	Africa	14	Lumbo
+40.67	-15.03	Mozambique	67241	Africa	14	Lumbo
+40.67	-15.03	Mozambique	67241	Africa	14	Lumbo
+40.67	-15.03	Mozambique	67241	Africa	14	Lumbo
+40.67	-15.03	Mozambique	67241	Africa	14	Lumbo
+40.67	-15.03	Mozambique	67241	Africa	14	Lumbo

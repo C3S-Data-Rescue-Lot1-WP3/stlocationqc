@@ -39,9 +39,9 @@
 #' \dontrun{
 #' ##
 #' ## First run
-#' get_lon180(coords_lon360)
+#' get_lon180(coords = ispd)
 #' ## Or
-#' test_geocoord(coords_sample)
+#' test_geocoord(coords = eraclim_uao_fp)
 #' ## Then run sequentially
 #' get_country(icoords)
 #' get_country_shoreline(icoords, tol)
@@ -64,7 +64,12 @@
 get_country_shoreline <- function(icoords, tol = 500) {
   coords <- icoords
   coords$id <- NULL
-  load("countries_polys_50m.RData", envir = .GlobalEnv)
+  if (file.exists("polys/countries_polys_50m.rda")) {
+    load("polys/countries_polys_50m.rda", envir = .GlobalEnv)
+  } else {
+    countries_polys()
+    load("polys/countries_polys_50m.rda", envir = .GlobalEnv)
+  }
   cat("\n")
   cat("Processing Country names for points close to the shoreline...\n\n")
   gname_sp <- countries_polys_50m
@@ -113,7 +118,6 @@ get_country_shoreline <- function(icoords, tol = 500) {
     crdata <- paste("out_get_country_shoreline_", as.character(tol),
       ".RData", sep = "")
     save(countries_sh, miss_countries_sh, file = crdata)
-    cat("\n")
     cat("There are still unnamed points.\n")
     cat("Please, try with a greater tolerance or run get_sea() \n")
     cat("with 'miss_countries_sh' as input parameter. \n")

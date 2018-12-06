@@ -52,9 +52,9 @@
 #' ## inventory and MEDARE - MEditerranean climate DAta REscue
 #' ##
 #' ## First run
-#' get_lon180(coords_lon360)
+#' get_lon180(coords = ispd)
 #' ## Or
-#' test_geocoord(coords_sample)
+#' test_geocoord(coords = eraclim_uao_fp)
 #' ## Then run
 #' get_country(icoords)
 #' }
@@ -77,8 +77,16 @@ get_country <- function(icoords = NULL) {
   coords <- icoords
   coords$id <- NULL
   # SpatialPolygonsDataFrames - 10 m and 50 m
-  load("countries_polys_10m.RData", envir = .GlobalEnv)
-  load("countries_polys_50m.RData", envir = .GlobalEnv)
+  if (file.exists("polys/countries_polys_10m.rda")) {
+    load("polys/countries_polys_10m.rda", envir = .GlobalEnv)
+    load("polys/countries_polys_50m.rda", envir = .GlobalEnv)
+  } else {
+    countries_polys()
+    load("polys/countries_polys_10m.rda", envir = .GlobalEnv)
+    load("polys/countries_polys_50m.rda", envir = .GlobalEnv)
+  }
+  #load("countries_polys_10m.rda", envir = .GlobalEnv)
+  #load("countries_polys_50m.rda", envir = .GlobalEnv)
   cat("\n")
   cat("Processing Country names...\n\n")
   gname_sp10 <- countries_polys_10m
