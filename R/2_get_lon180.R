@@ -9,9 +9,9 @@
 #' \strong{Input:}
 #' \itemize{
 #' \item A text file without header with the geographic coordinates in decimal
-#' degrees: the longitude in the first column and the latitude in the
-#' second column, separated by tabs. Missing values must be codified as
-#' '-999.0'.
+#' degrees: the longitude in the first column and the latitude in the second
+#' column, separated by tabs. Missing values must be codified as 'NA' in all
+#' fields.
 #' \item Or a data frame with that same format and the column names: \strong{lon
 #' | lat}.
 #' }
@@ -35,12 +35,7 @@
 #' @examples
 #' \dontrun{
 #' ##
-#' ## A sample of coordinate pairs with the longitude in the range [0, 360],
-#' ## extracted from the list of meteorological stations belonging to
-#' ## ISPD - International Surface Pressure Databank.
-#' ## Run the line below to see the example:
-#' ##
-#' get_lon180(coords = coords_lon360)  # CRIAR O OBJECTO coords_lon360!!!!
+#' get_lon180(coords = ispd)
 #' }
 #'
 #' @usage
@@ -51,8 +46,9 @@
 #' get_lon180(coords = NULL)
 #'
 #' @param coords data frame with the geographic coordinates in decimal degrees,
-#' the longitude in the first column, the latitude in the second column and
-#' the column names: \strong{lon | lat}.
+#'   the longitude in the first column, the latitude in the second column and
+#'   the column names: \strong{lon | lat} (other columns can exist, however are
+#'   unnecessary for this function).
 #'
 #' @import stats
 #' @import utils
@@ -62,13 +58,16 @@
 get_lon180 <- function(coords = NULL) {
   # Creates the data frame with the coordinates
   if (!is.null(coords)) {
-    coords <- coords
+    coords <- coords[, 1:2, drop = FALSE]
   } else {
     cat("\n")
     cat("Please, choose the text file with the coordinates.\n")
     coords <- read.table(file.choose(), header = FALSE, sep = "\t", quote = "",
-      col.names = c("lon", "lat"), na.strings = "-999",
       stringsAsFactors = FALSE)
+    coords <- coords[, 1:2, drop = FALSE]
+    names(coords) <- c("lon", "lat")
+    coords$lon <- as.numeric(coords$lon)
+    coords$lat <- as.numeric(coords$lat)
   }
   # Data limits
   cat("\n")

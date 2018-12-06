@@ -31,9 +31,9 @@
 #' \dontrun{
 #' ##
 #' ## First run
-#' get_lon180(coords_lon360)
+#' get_lon180(coords = ispd)
 #' ## Or
-#' test_geocoord(coords_sample)
+#' test_geocoord(coords = eraclim_uao_fp)
 #' ## Then run sequentially
 #' get_country(icoords)
 #' get_country_shoreline(icoords, tol)
@@ -58,7 +58,12 @@ get_sea <- function(icoords){
   coords1 <- icoords
   coords1$id <- NULL
   # SpatialPolygonsDataFrame - 10 m
-  load("seas_polys_10m.RData", envir = .GlobalEnv)
+  if (file.exists("polys/seas_polys_10m.rda")) {
+    load("polys/seas_polys_10m.rda", envir = .GlobalEnv)
+  } else {
+    seas_polys()
+    load("polys/seas_polys_10m.rda", envir = .GlobalEnv)
+  }
   cat("\n")
   cat("Processing Sea names...\n\n")
   # Uses a SpatialPolygonsDataFrame with marine areas polygons of 10 meters

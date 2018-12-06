@@ -45,7 +45,8 @@ rm(tmp10)
 # Reads the data into a SpatialPolygonsDataFrame (R object from the "sp"
 # package)
 mar10_sp <- rgdal::readOGR(dsn = tempdir(),
-  layer = "ne_10m_geography_marine_polys")
+  layer = "ne_10m_geography_marine_polys", stringsAsFactors = FALSE,
+  encoding = "UTF-8", use_iconv = TRUE)
 # View the field names in the shapefile attribute table
 # Could use names(mar_sp@data) or just:
 # names(mar10_sp)
@@ -60,17 +61,17 @@ nec_fields10 <- c("name", "note", "name_fr", "name_de", "name_en", "name_es",
   "name_pt", "ne_id")
 seas_polys_10m <- mar10_sp[, nec_fields10]
 # Saves the SpatialPolygonsDataFrame as .RData
-# if (!file.exists("data")) {
-#   dir.create("data")
-# }
+if (!file.exists("polys")) {
+  dir.create("polys")
+}
 # devtools::use_data(seas_polys_10m, overwrite = TRUE)
 # con <- pipe("xz -T8 -6 -e > seas_polys_10m.xz", "wb")
 # save(seas_polys_10m, file = con); close(con)
-save(seas_polys_10m, file = "seas_polys_10m.RData")
+save(seas_polys_10m, file = "polys/seas_polys_10m.rda")
 cat("\n")
 cat("A spatial object with the seas polygons of 10 m precision as \n")
-cat("been created and saved in the current working directory as \n")
-cat("'seas_polys_10m.RData'.\n")
+cat("been created and saved in the 'polys' directory as \n")
+cat("'seas_polys_10m.rda'.\n")
 print(class(seas_polys_10m))
 cat("Extension of the object (longitude, latitude):\n")
 print(seas_polys_10m@bbox)
