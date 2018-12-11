@@ -11,10 +11,10 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Imports: 
+    raster,
     rgdal,
+    rgeos,
     sp,
     stats,
     utils
-Suggests:
-    raster
 RoxygenNote: 6.1.0
