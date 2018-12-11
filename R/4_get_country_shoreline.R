@@ -56,6 +56,8 @@
 #'   the latitude. Both coordinates are in decimal degrees.
 #' @param tol is the tolerance in meters. By default, tol = 500 meters.
 #'
+#' @importFrom raster buffer
+#' @import rgeos
 #' @import sp
 #' @import utils
 #'
