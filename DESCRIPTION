@@ -6,7 +6,7 @@ Affiliation: FCiencias.ID - Sciences Association for Research and Development (F
 Description: Metadata quality control functions developed for the Copernicus Data Rescue Service.
 URL: https://github.com/mcmventura/stlocationqc
 BugReports: https://github.com/mcmventura/stlocationqc/issues
-Depends: R (>= 3.4.0)
+Depends: R (>= 3.3.0)
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

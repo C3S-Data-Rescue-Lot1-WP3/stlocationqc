@@ -1,4 +1,4 @@
-# Reads and Creates Example Datasets
+# Creates Example Datasets
 
 # Directory for the Examples
 if (!file.exists("data-raw/Examples-inventories")) {

@@ -2,15 +2,14 @@
 #' Object.
 #'
 #' Downloads from Natural Earth a shapefile with the world seas polygons of 10 m
-#' precision and then transforms it into a SpatialPolygonsDataFrame which is
-#' saved in the user's working directory. The data it contains is necessary for
-#' the function \code{\link{get_sea}} to work.
+#' precision and then transforms it into a SpatialPolygonsDataFrame that is
+#' saved in a folder called 'polys', inside the user's working directory. The
+#' data it contains is necessary for the function \code{\link{get_sea}} to work.
 #'
 #' @details
-#' Before run this function the user should verify that the working directory is
-#' the correct one because the SpatialPolygonsDataFrame will be saved in the
-#' working directory as a .RData file. That file is loaded from the working
-#' directory when running the function \code{\link{get_sea}}.
+#' The SpatialPolygonsDataFrame is saved in the working directory, inside the
+#' 'polys' folder as a .rda file and it is loaded from there when running the
+#' function \code{\link{get_sea}}.
 #'
 #' \strong{Shapefile:}
 #' \itemize{

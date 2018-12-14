@@ -12,18 +12,30 @@
 #' second column, both in decimal degrees. The given country name goes in the
 #' third column. The columns are separated by tabs and missing values must be
 #' codified as 'NA' in all fields.
-#' \item The data frames with names assigned to the coordinates, i.e., the
-#' output of \code{\link{get_country}}, \code{\link{get_country_shoreline}} or
-#' \code{\link{get_sea}}. If exists 'miss_seas' or 'excl_coords' (output of
-#' \code{\link{test_geocoord}} / \code{\link{get_lon180}}), they should be
-#' considered.
+#' \item The output of \code{\link{get_country}} - \strong{'countries'} -,
+#' \code{\link{get_country_shoreline}} - \strong{'countries_sh'} -,
+#' \code{\link{get_sea}} - \strong{'seas'} and \strong{'miss_seas'} - and
+#' \code{\link{get_lon180}} or \code{\link{test_geocoord}} -
+#' \strong{'excl_coords'}. However, only the 'countries' data frame is
+#' compulsory because all those data frames may not exist.
 #' }
 #' \strong{Output:}
 #' \itemize{
-#' \item Several text files, until the maximum of 9, divided by types of
-#' differences in the country name and the following header: \strong{country_gv
-#' |id | lon | lat | country | sovereignt | adm0_a3 | name_de | name_es |
-#' name_fr | name_pt}.
+#' \item Several text files, until the maximum of 9, which have the following
+#' header: \strong{country_gv |id | lon | lat | country | sovereignt | adm0_a3 |
+#' name_de | name_es | name_fr | name_pt}. Those files split the list of points
+#' by types of differences between the given and the determinated country name:
+#' \itemize{
+#' \item Missing given or determined country name
+#' \item Equal country name
+#' \item Given country name equals to sovereignty
+#' \item Given country name in another language
+#' \item Given country name in upper case
+#' \item Given country name with some equal words - English or another language
+#' \item Set of 3 letters equals at the beginning or at the end of the words
+#' \item Points that fall into the sea
+#' \item Different country name
+#' }
 #' }
 #'
 #' @examples
@@ -32,12 +44,13 @@
 #' ## First run
 #' test_geocoord(coords = eraclim_uao_fp)
 #' ## Then run sequentially until all points have names assigned
-#' get_country(icoords)
-#' get_country_shoreline(icoords, tol)
-#' get_sea(icoords)
+#' get_country(icoords = coords_ok)
+#' get_country_shoreline(icoords = miss_countries, tol)
+#' get_sea(icoords = miss_countries_sh)
 #' ## And finally
-#' compare_country(countries_gv = NULL, countries, countries_sh = NULL, seas =
-#' NULL, miss_seas = NULL, excl_coords = NULL)
+#' compare_country(countries_gv = eraclim_uao_fp, countries = countries,
+#' countries_sh = countries_sh, seas = seas, miss_seas = miss_seas, excl_coords
+#' = excl_coords)
 #' }
 #'
 #' @usage
@@ -127,11 +140,11 @@ compare_country <- function(countries_gv = NULL, countries,
   }
   # Missing given country name
   miss_gvname <- comp_df[is.na(comp_df$country_gv), ]
-  comp_df <- comp_df[!(comp_df$id %in% miss_gvname$id), ]
   # Not applicable country name
   miss_detname <- comp_df[comp_df$country == "MISSING_NAME" |
       comp_df$country == "ERRONEOUS-MISSING_COORDS", ]
-  comp_df <- comp_df[!(comp_df$id %in% miss_detname$id), ]
+  miss_name <- unique(rbind(miss_gvname, miss_detname))
+  comp_df <- comp_df[!(comp_df$id %in% miss_name$id), ]
   # Equal country name
   eq_name <- comp_df[comp_df$country_gv == comp_df$country, ]
   comp_df <- comp_df[!(comp_df$id %in% eq_name$id), ]
@@ -209,7 +222,6 @@ compare_country <- function(countries_gv = NULL, countries,
   }
   # Set of 3 letters equal at the beginning or at the end of the words
   if (nrow(comp_df) != 0){
-    # Mudar para eq_char_beg and eq_char_end
   eq_word_beg <- data.frame()
   eq_word_end <- data.frame()
   for (k in 1:nrow(comp_df)) {
@@ -255,43 +267,55 @@ compare_country <- function(countries_gv = NULL, countries,
     into_the_sea <- comp_df[as.logical(water), ]
     comp_df <- comp_df[!(comp_df$id %in% into_the_sea$id), ]
   }
-  # Outputs
-  if (nrow(miss_gvname) != 0) {
-    write.table(miss_gvname, file = "missing_given_country.txt",
-      row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
+  # Output directory
+  if (!file.exists("txt-compare_country")) {
+    dir.create("txt-compare_country")
   }
-  if (nrow(miss_detname) != 0) {
-    write.table(miss_detname, file = "missing_determinated_country.txt",
+  # Outputs
+  if (nrow(miss_name) != 0) {
+    write.table(miss_name,
+      file = "txt-compare_country/missing_given_or_determined_country.txt",
       row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
   }
   if (nrow(eq_name) != 0) {
-    write.table(eq_name, file = "equal_country.txt",
+    write.table(eq_name,
+      file = "txt-compare_country/equal_country.txt",
       row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
   }
   if (nrow(eq_sovergt) != 0) {
-    write.table(eq_sovergt, file = "equal_sovereignt.txt",
+    write.table(eq_sovergt,
+      file = "txt-compare_country/country_equals_sovereignt.txt",
       row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
   }
   if (nrow(eq_name_olang) != 0) {
-    write.table(eq_name_olang, file = "equal_country-other_language.txt",
+    write.table(eq_name_olang,
+      file = "txt-compare_country/equal_country_other_language.txt",
+      row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
+  }
+  if (nrow(eq_upcase) != 0) {
+    write.table(eq_upcase,
+      file = "txt-compare_country/equal_country_upper_case.txt",
       row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
   }
   if (exists("eq_word_name") && nrow(eq_word_name) != 0) {
-    write.table(eq_word_name, file = "equal_word-en_or_other_language.txt",
+    write.table(eq_word_name,
+      file = "txt-compare_country/equal_word_en_or_other_language.txt",
       row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
     eqwn <- nrow(eq_word_name)
   } else {
     eqwn <- 0
   }
   if (exists("eq_subword") && nrow(eq_subword) != 0) {
-    write.table(eq_subword, file = "equal_character_set_country.txt",
+    write.table(eq_subword,
+      file = "txt-compare_country/equal_character_set_country.txt",
       row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
     eqsw <- nrow(eq_subword)
   } else {
     eqsw <- 0
   }
   if (exists("into_the_sea") && nrow(into_the_sea) != 0) {
-    write.table(into_the_sea, file = "into_the_sea.txt",
+    write.table(into_the_sea,
+      file = "txt-compare_country/into_the_sea.txt",
       row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
     itsea <- nrow(into_the_sea)
   } else {
@@ -299,24 +323,23 @@ compare_country <- function(countries_gv = NULL, countries,
   }
   # Different country
   if (nrow(comp_df) != 0){
-    write.table(comp_df, file = "different_country.txt",
+    write.table(comp_df,
+      file = "txt-compare_country/different_country.txt",
       row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
   }
-  report <- cbind(c("Missing given country name: ",
-    "Missing determined country name / not applicable: ",
+  report <- cbind(c("Missing given or determined country name: ",
     "Equal country name: ",
-    "Given country name equal to sovereignt: ",
-    "Given country name in other language: ",
-    "Given country name with some equal words - english or other language: ",
-    "Set of 3 letters equal at the beginning or at the end of the words: ",
+    "Given country name equals to sovereignty: ",
+    "Given country name in another language: ",
+    "Given country name in upper case: ",
+    "Given country name with some equal words - English or another language: ",
+    "Set of 3 letters equals at the beginning or at the end of the words: ",
     "Points that fall into the sea: ",
     "Different country name: "),
-    c(nrow(miss_gvname), nrow(miss_detname), nrow(eq_name),
-      nrow(eq_sovergt), nrow(eq_name_olang),
-      eqwn, eqsw, itsea,
-      nrow(comp_df)))
-  cat("Please, check the output text files. \n")
+    c(nrow(miss_name), nrow(eq_name), nrow(eq_sovergt), nrow(eq_name_olang),
+      nrow(eq_upcase), eqwn, eqsw, itsea, nrow(comp_df)))
   cat("\n")
+  cat("Please check the directory \\txt-compare_country.\n\n")
   return(as.table(report))
 }
 
