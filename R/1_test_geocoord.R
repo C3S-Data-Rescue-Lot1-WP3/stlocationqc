@@ -1,39 +1,39 @@
 #' Tests the Geographic Coordinates.
 #'
-#' Given a list of geographic coordinates, tests if the longitude is in the
-#' range [-180, +180] and if the latitude is in the range [-90, +90]. Also tests
-#' the coordinates for missing values.
+#' Given a list of geographic coordinates, tests if the longitude belongs to
+#' (-180, +180) degrees and if the latitude belongs to (-90, +90) degrees. Also
+#' tests the coordinates for missing values.
 #'
 #' @details
 #' \strong{Input:}
 #' \itemize{
-#' \item A text file without header with the geographic coordinates in decimal
-#' degrees: the longitude in the first column and the latitude in the
-#' second column, separated by tabs. Missing values must be codified as
-#' 'NA' in all fields.
-#' \item Or a data frame with that same format and the column names: \strong{lon
-#' | lat}.
+#' \item A \strong{text file} without header with the geographic coordinates in
+#' decimal degrees: the longitude in the first column and the latitude in the
+#' second column, separated by tabs (other columns could exist, however are
+#' unnecessary for this function). Missing values must be codified as 'NA' in
+#' all fields.
+#' \item Or a \strong{data frame} with that same format and the column names:
+#' \strong{lon | lat}.
 #' }
 #' \strong{Output:}
 #' \itemize{
-#' \item A text file named 'coords_ok' with three columns \strong{id | lon |
-#' lat} where: 'id' is the row identifier for the coordinates in the original
-#' list of coordinates, 'lon' is the longitude in the range [-180, +180] and
-#' 'lat' is the latitude. Both coordinates are in decimal degrees.
+#' \item A text file named 'coords_ok' with three columns id | lon | lat, where:
+#' 'id' is the row identifier for the coordinates in the original list of
+#' coordinates, 'lon' is the longitude in the range (-180, +180) and 'lat' is
+#' the latitude. Both coordinates are in decimal degrees.
 #' \item If there are errors, the function writes a text file with the
 #' coordinate pairs containing at least one coordinate out of bounds.
 #' \item If there are missing coordinates, the function writes a text file with
 #' the coordinate pairs containing at least one missing coordinate.
-#' \item A .RData file  with the output data frame(s) which has/have the column
-#' names: \strong{id | lon | lat}. The data frame 'coords_ok' can be used as
-#' input parameter of \code{\link{get_country}} or \code{\link{get_sea}} to
-#' determine the country or the sea names. Eventually is created the data frame
-#' 'excl_coords' with the erroneous and/or missing coordinates.
+#' \item A .RData file  with the output data frame(s) that has/have the column
+#' names: \strong{id | lon | lat}. The data frame \strong{'coords_ok'} can be
+#' used as input parameter of \code{\link{get_country}} to determine the country
+#' names. Eventually is created the data frame \strong{'excl_coords'} with the
+#' erroneous and/or missing coordinates.
 #' }
 #'
 #' @examples
 #' \dontrun{
-#' ##
 #' test_geocoord(coords = eraclim_uao_fp)
 #' }
 #'
@@ -46,8 +46,8 @@
 #'
 #' @param coords data frame with the geographic coordinates in decimal degrees,
 #'   the longitude in the first column, the latitude in the second column and
-#'   the column names: \strong{lon | lat} (other columns can exist, however are
-#'   unnecessary for this function).
+#'   the column names: \strong{lon | lat} (other columns could exist, however
+#'   are unnecessary for this function).
 #'
 #' @import stats
 #' @import utils
@@ -101,38 +101,42 @@ test_geocoord <- function(coords = NULL) {
   } else {
     cat("There are errors in the coordinates.\n\n")
   }
+  # Output directory
+  if (!file.exists("txt-test_geocoord")) {
+    dir.create("txt-test_geocoord")
+  }
   # Output without errors
   if (nrow(excl_coords) == 0) {
-    write.table(coords_ok, file = "coords_ok.txt", row.names = FALSE,
-      col.names = TRUE, sep = "\t", quote = FALSE)
+    write.table(coords_ok, file = "txt-test_geocoord/coords_ok.txt",
+      row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
     save(coords_ok, file = "coords_ok.RData")
-    cat("Please check, 'coords_ok.txt'.\n\n")
     cat("The data frame 'coords_ok' was saved as .RData in the working \n")
     cat("directory.\n\n")
+    cat("Please check also the directory \\txt-test_geocoord.\n\n")
     # Output with errors
   } else {
     # Correct coordinates
-    write.table(coords_ok, file = "coords_ok.txt", row.names = FALSE,
-      col.names = TRUE, sep = "\t", quote = FALSE)
+    write.table(coords_ok, file = "txt-test_geocoord/coords_ok.txt",
+      row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
     # Erroneous coordinates
     if (nrow(erro_coords) != 0) {
-      write.table(erro_coords, file = "erroneous_coordinates.txt",
+      write.table(erro_coords,
+        file = "txt-test_geocoord/erroneous_coordinates.txt",
         row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
-      cat("Were found longitude and/or latitude values out of bounds.\n")
-      cat("Please check 'erroneous_coordinates.txt'.\n\n")
+      cat("Were found longitude and/or latitude values out of bounds.\n\n")
     }
     # Missing coordinates
     if (nrow(miss_coords) != 0) {
-      write.table(miss_coords, file = "missing_coordinates.txt",
+      write.table(miss_coords,
+        file = "txt-test_geocoord/missing_coordinates.txt",
         row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
-      cat("Were found missing coordinates.\n")
-      cat("Please check 'missing_coordinates.txt'.\n\n")
+      cat("Were found missing coordinates.\n\n")
     }
     save(coords_ok, excl_coords, file = "out_test_geocoord.RData")
     cat("Erroneous and/or missing coordinates have been excluded from the \n")
     cat("output 'coords_ok'.\n\n")
-    cat("Please check, 'coords_ok.txt'.\n\n")
     cat("The data frames 'coords_ok' and 'excl_coords' were saved into \n")
     cat("'out_test_geocoord.RData' in the working directory.\n\n")
+    cat("Please check also the directory \\txt-test_geocoord.\n\n")
   }
 }

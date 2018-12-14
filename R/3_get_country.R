@@ -9,33 +9,34 @@
 #' @details
 #' \strong{Input:}
 #' \itemize{
-#' \item A data frame with three columns \strong{id | lon | lat}, i.e., the
-#' output of \code{\link{test_geocoord}} - 'coords_ok' -, or the output of
-#' \code{\link{get_lon180}} - 'coords_lon180'. To use the present function it is
-#' necessary that the coordinates do not have any errors or missing values. This
-#' requires previous running of \code{\link{test_geocoord}} or
-#' \code{\link{get_lon180}} that in addition to testing the coordinates, creates
-#' the 'id' which is the row identifier for the coordinates in the original list
-#' of coordinates. After running sequentially \code{\link{get_country}},
-#' \code{\link{get_country_shoreline}} and \code{\link{get_sea}} to assign the
-#' geographic names, the 'id' is necessary to display the coordinates in the
-#' initial order at the end of the process (which consists of a sucessive
-#' elimination of missing names), with or without all the names assigned.
+#' \item  The output of \code{\link{test_geocoord}} - \strong{'coords_ok'} -, or
+#' the output of \code{\link{get_lon180}} - \strong{'coords_lon180'}, i.e., a
+#' data frame with three columns: \strong{id | lon | lat}. To use the present
+#' function it is necessary that the coordinates do not have any errors or
+#' missing values. This requires previous running of \code{\link{test_geocoord}}
+#' or \code{\link{get_lon180}} that in addition to testing the coordinates,
+#' creates the 'id' which is the row identifier for the coordinates in the
+#' original list of coordinates. After running sequentially
+#' \code{\link{get_country}}, \code{\link{get_country_shoreline}} and
+#' \code{\link{get_sea}} to assign the geographic names, the 'id' is necessary
+#' to display the coordinates in the initial order at the end of the process
+#' (which consists of a sucessive elimination of missing names), with or without
+#' all the names assigned.
 #' }
 #' \strong{Output:}
 #' \itemize{
 #' \item A text file with all the points for which a country name was
-#' determined. That file has the following header: \strong{id | lon | lat |
-#' country | sovereignt | adm0_a3 | name_de | name_es | name_fr | name_pt}.
+#' determined. That file has the following header: id | lon | lat |
+#' country | sovereignt | adm0_a3 | name_de | name_es | name_fr | name_pt.
 #' \item A text file with the missing country names, if they exist.
 #' \item A .RData file  with the output data frame(s). The data frame
-#' 'countries' as the header \strong{id | lon | lat | country | sovereignt |
-#' iso3 | subregion | continent}. The data frame 'miss_countries' as the header
-#' \strong{id | lon | lat} and is the input of
-#' \code{\link{get_country_shoreline}} to determine the missing country names or
-#' the input of \code{\link{get_sea}}, if the user wants to verify if the still
-#' unamed points fall into to the sea and calculate the sea name were they are
-#' located.
+#' \strong{'countries'} has the header \strong{id | lon | lat | country |
+#' sovereignt | iso3 | subregion | continent}. The data frame
+#' \strong{'miss_countries'} has the header \strong{id | lon | lat} and it is
+#' the input of \code{\link{get_country_shoreline}} to determine the missing
+#' country names or the input of \code{\link{get_sea}}, if the user wants to
+#' verify if the still unamed points fall into to the sea and calculate the sea
+#' name were they are located.
 #' }
 #'
 #' @references
@@ -44,19 +45,12 @@
 #'
 #' @examples
 #' \dontrun{
-#' ##
-#' ## Example:
-#' ## A sample of coordinate pairs with the longitude in the range [-180, +180],
-#' ## extracted from the list of meteorological stations belonging to
-#' ## ISPD - International Surface Pressure Databank, ERACLIM upper-air
-#' ## inventory and MEDARE - MEditerranean climate DAta REscue
-#' ##
 #' ## First run
 #' get_lon180(coords = ispd)
 #' ## Or
 #' test_geocoord(coords = eraclim_uao_fp)
 #' ## Then run
-#' get_country(icoords)
+#' get_country(icoords = coords_ok)
 #' }
 #'
 #' @usage
@@ -64,7 +58,7 @@
 #'
 #' @param icoords data frame with three columns: \strong{id | lon | lat} where:
 #'   'id' is the row identifier for the coordinates in the original list of
-#'   coordinates, 'lon' is the longitude in the range [-180, +180] and 'lat' is
+#'   coordinates, 'lon' is the longitude in the range (-180, +180) and 'lat' is
 #'   the latitude. Both coordinates are in decimal degrees.
 #'
 #' @import sp
@@ -72,7 +66,7 @@
 #'
 #' @export
 #'
-get_country <- function(icoords = NULL) {
+get_country <- function(icoords) {
   # Data frame with the coordinates
   coords <- icoords
   coords$id <- NULL
@@ -112,18 +106,24 @@ get_country <- function(icoords = NULL) {
   countries_na10 <- gname10[is.na(gname10$country), ]
   # Subsets the coordinate points with country names assigned
   countries10 <- gname10[!(gname10$id %in% countries_na10$id), ]
+  # Output directory
+  if (!file.exists("txt-get_country")) {
+    dir.create("txt-get_country")
+  }
   # Country names are assigned to all points using the shapefile with 10 m
   # precision
   if (nrow(countries_na10) == 0) {
-    write.table(countries10, file = "countries.txt", row.names = FALSE,
-      col.names = TRUE, sep = "\t", quote = FALSE)
+    write.table(countries10, file = "txt-get_country/countries.txt",
+      row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
     countries <- countries10
     save(countries, file = "countries.RData")
     report <- cbind(c("Coordinate pairs processed: ",
       "Country names returned: ",
       "Country names missing: "),
       c(nrow(gname10), nrow(countries10), nrow(countries_na10)))
-    cat("Please, check 'countries.txt' and 'countries.RData'.\n\n")
+    cat("The data frame 'countries' was saved as .RData in the working \n")
+    cat("directory.\n\n")
+    cat("Please check also the directory \\txt-get_country.\n\n")
   # Case: country names are missing after using the shapefile with 10 m
   # precision
   } else {
@@ -153,24 +153,28 @@ get_country <- function(icoords = NULL) {
     countries50 <- gname50[!(gname50$id %in% countries_na50$id), ]
     # Data frame that contains all the points with country names assignd
     countries <- rbind(countries10, countries50)
-    write.table(countries, file = "countries.txt", row.names = FALSE,
-      col.names = TRUE, sep = "\t", quote = FALSE)
+    write.table(countries, file = "txt-get_country/countries.txt",
+      row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
     report <- cbind(c("Coordinate pairs processed: ",
       "Country names returned: ",
       "Country names missing: "),
       c(nrow(gname10), nrow(countries), nrow(countries_na50)))
     if (nrow(countries_na50) == 0) {
       save(countries, file = "countries.RData")
-      cat("Please check 'countries.txt' and 'countries.RData'.\n\n")
+      cat("The data frame 'countries' was saved as .RData in the working \n")
+      cat("directory.\n\n")
+      cat("Please check also the directory \\txt-get_country.\n\n")
     } else {
       # Case: country names still missing after using the shapefile with 50 m
       # precision
-      write.table(countries_na50, file = "missing_countries.txt",
+      write.table(countries_na50,
+        file = "txt-get_country/missing_countries.txt",
         row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
       miss_countries <- countries_na50[, 1:3, drop = FALSE]
       save(countries, miss_countries, file = "out_get_country.RData")
-      cat("Please check 'countries.txt', 'missing_countries.txt' and \n")
-      cat("'out_get_country.RData'.\n")
+      cat("The data frames 'countries' and 'miss_countries' were saved into \n")
+      cat("'out_get_country.RData' in the working directory.\n\n")
+      cat("Please check also the directory \\txt-get_country.\n\n")
       cat("There are names missing, please run the function \n")
       cat("'get_country_shoreline()' or 'get_sea()' with the data frame \n")
       cat("'miss_countries' as input parameter.\n\n")

@@ -1,40 +1,40 @@
-#' Tests the Geographic Coordinates and Transforms the Longitude from [0, 360]
-#' to [-180, +180].
+#' Tests the Geographic Coordinates and Transforms the Longitude from (0, 360)
+#' to (-180, +180).
 #'
 #' Given a list of geographic coordinates, first tests the coordinates for out
-#' of bounds values and missing values. Then transforms the longitude from [0,
-#' 360] to [-180, +180], considering 6 significative digits.
+#' of bounds values and missing values. Then transforms the longitude from (0,
+#' 360) to (-180, +180) degrees, considering 6 significative digits.
 #'
 #' @details
 #' \strong{Input:}
 #' \itemize{
-#' \item A text file without header with the geographic coordinates in decimal
-#' degrees: the longitude in the first column and the latitude in the second
-#' column, separated by tabs. Missing values must be codified as 'NA' in all
-#' fields.
-#' \item Or a data frame with that same format and the column names: \strong{lon
-#' | lat}.
+#' \item A \strong{text file} without header with the geographic coordinates in
+#' decimal degrees: the longitude in the first column and the latitude in the
+#' second column, separated by tabs (other columns could exist, however are
+#' unnecessary for this function). Missing values must be codified as 'NA' in
+#' all fields.
+#' \item Or a \strong{data frame} with that same format and the column names:
+#' \strong{lon | lat}.
 #' }
 #' \strong{Output:}
 #' \itemize{
-#' \item A text file named 'coords_lon180' with three columns \strong{id | lon |
-#' lat} where: 'id' is the row identifier for the coordinates in the original
-#' list of coordinates, 'lon' is the longitude in the range [-180, +180] and
-#' 'lat' is the latitude. Both coordinates are in decimal degrees.
+#' \item A text file named 'coords_lon180' with three columns id | lon | lat,
+#' where: 'id' is the row identifier for the coordinates in the original list of
+#' coordinates, 'lon' is the longitude in the range (-180, +180) and 'lat' is
+#' the latitude. Both coordinates are in decimal degrees.
 #' \item If there are errors, the function writes a text file with the
 #' coordinate pairs containing at least one coordinate out of bounds.
 #' \item If there are missing coordinates, the function writes a text file with
 #' the coordinate pairs containing at least one missing coordinate.
-#' \item A .RData file  with the output data frame(s) which has/have the column
-#' names: \strong{id | lon | lat}. The data frame 'coords_lon180' can be used as
-#' input parameter of \code{\link{get_country}} or \code{\link{get_sea}} to
-#' determine the country or the sea names. Eventually is created the data frame
-#' 'excl_coords' with the erroneous and/or missing coordinates.
+#' \item A .RData file with the output data frame(s) that has/have the column
+#' names: \strong{id | lon | lat}. The data frame \strong{'coords_lon180'} can
+#' be used as input parameter of \code{\link{get_country}} to determine the
+#' country names. Eventually is created the data frame \strong{'excl_coords'}
+#' with the erroneous and/or missing coordinates.
 #' }
 #'
 #' @examples
 #' \dontrun{
-#' ##
 #' get_lon180(coords = ispd)
 #' }
 #'
@@ -102,6 +102,7 @@ get_lon180 <- function(coords = NULL) {
   } else {
     cat("There are errors in the coordinates.\n\n")
   }
+  cat("Transforming longitude...\n\n")
   # Transforming the longitude to the range [-180, +180]
   coords_lon180 <- corr_coords
   for (i in 1:nrow(coords_lon180)) {
@@ -114,38 +115,41 @@ get_lon180 <- function(coords = NULL) {
   cat("New longitude limits:\n")
   print(range(coords_lon180$lon))
   cat("\n")
+  # Output directory
+  if (!file.exists("txt-get_lon180")) {
+    dir.create("txt-get_lon180")
+  }
   # Output without errors
   if (nrow(excl_coords) == 0) {
-    write.table(coords_lon180, file = "coords_lon180.txt", row.names = FALSE,
-      col.names = TRUE, sep = "\t", quote = FALSE)
+    write.table(coords_lon180, file = "txt-get_lon180/coords_lon180.txt",
+      row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
     save(coords_lon180, file = "coords_lon180.RData")
-    cat("Please check, 'coords_lon180.txt'.\n\n")
     cat("The data frame 'coords_lon180' was saved as .RData in the working \n")
     cat("directory.\n\n")
+    cat("Please check also the directory \\txt-get_lon180.\n\n")
   # Output with errors
   } else {
     # Correct and transformed coordinates
-    write.table(coords_lon180, file = "coords_lon180.txt", row.names = FALSE,
-      col.names = TRUE, sep = "\t", quote = FALSE)
+    write.table(coords_lon180, file = "txt-get_lon180/coords_lon180.txt",
+      row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
     # Erroneous coordinates
     if (nrow(erro_coords) != 0) {
-      write.table(erro_coords, file = "erroneous_coordinates.txt",
+      write.table(erro_coords,
+        file = "txt-get_lon180/erroneous_coordinates.txt",
         row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
-      cat("Were found longitude and/or latitude values out of bounds.\n")
-      cat("Please check 'erroneous_coordinates.txt'.\n\n")
+      cat("Were found longitude and/or latitude values out of bounds.\n\n")
     }
     # Missing coordinates
     if (nrow(miss_coords) != 0) {
-      write.table(miss_coords, file = "missing_coordinates.txt",
+      write.table(miss_coords, file = "txt-get_lon180/missing_coordinates.txt",
         row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
-      cat("Were found missing coordinates.\n")
-      cat("Please check 'missing_coordinates.txt'.\n\n")
+      cat("Were found missing coordinates.\n\n")
     }
-    save(coords_lon180, excl_coords, file = "output_get_lon180.RData")
+    save(coords_lon180, excl_coords, file = "out_get_lon180.RData")
     cat("Erroneous and/or missing coordinates have been excluded from the \n")
     cat("output with the transformed longitude.\n\n")
-    cat("Please check, 'coords_lon180.txt'.\n\n")
     cat("The data frames 'coords_lon180' and 'excl_coords' were saved into \n")
-    cat("'output_get_lon180.RData' in the working directory.\n\n")
+    cat("'out_get_lon180.RData' in the working directory.\n\n")
+    cat("Please check also the directory \\txt-get_lon180.\n\n")
   }
 }

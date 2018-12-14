@@ -14,22 +14,23 @@
 #' @details
 #' \strong{Input:}
 #' \itemize{
-#' \item The output of \code{\link{get_country}}, i.e., a data frame with three
-#' columns: \strong{id | lon | lat}.
+#' \item The output of \code{\link{get_country}} - \strong{'miss_countries'} -,
+#' i.e., a data frame with three columns: \strong{id | lon | lat}.
 #' }
 #' \strong{Output:}
 #' \itemize{
-#' \item Eventually, a text file with the points for which a country name was
-#' determined. That file has the following header: \strong{id | lon | lat |
-#' country | sovereignt | adm0_a3 | name_de | name_es | name_fr | name_pt}.
-#' \item Eventually, a text file with the points missing country names.
-#' \item A .RData file with the country names data frame - 'countries_sh' -, the
-#' missing country names data frame - 'miss_countries_sh' - or the both.
-#' 'miss_countries_sh' is the input of \code{\link{get_sea}} to determine the
-#' remaining names.
-#' }
+#' \item A text file with the points for which a country name was
+#' determined, if they exist. That file has the following header: id | lon | lat |
+#' country | sovereignt | adm0_a3 | name_de | name_es | name_fr | name_pt.
+#' \item A text file with the missing country names, if they exist.
 #'
-#' @seealso Requires \code{\link[raster]{buffer}}.
+#' \item A .RData file with the output data frame(s). The data frame
+#' \strong{'countries_sh'} has the header \strong{id | lon | lat | country |
+#' sovereignt | iso3 | subregion | continent}. The data frame
+#' \strong{'miss_countries_sh'} has the header \strong{id | lon | lat} and it is
+#' the input of \code{\link{get_sea}} to determine the sea name were those
+#' points are located.
+#' }
 #'
 #' @references
 #' Made with Natural Earth. Free vector and raster map data @@
@@ -43,8 +44,8 @@
 #' ## Or
 #' test_geocoord(coords = eraclim_uao_fp)
 #' ## Then run sequentially
-#' get_country(icoords)
-#' get_country_shoreline(icoords, tol)
+#' get_country(icoords = coords_ok)
+#' get_country_shoreline(icoords = miss_countries, tol)
 #' }
 #'
 #' @usage
@@ -52,7 +53,7 @@
 #'
 #' @param icoords data frame with three columns: \strong{id | lon | lat} where:
 #'   'id' is the row identifier for the coordinates in the original list of
-#'   coordinates, 'lon' is the longitude in the range [-180, +180] and 'lat' is
+#'   coordinates, 'lon' is the longitude in the range (-180, +180) and 'lat' is
 #'   the latitude. Both coordinates are in decimal degrees.
 #' @param tol is the tolerance in meters. By default, tol = 500 meters.
 #'
@@ -93,54 +94,63 @@ get_country_shoreline <- function(icoords, tol = 500) {
     stringsAsFactors = FALSE)
   countries_sh_na <- gname_sh[is.na(gname_sh$country), ]
   countries_sh <- gname_sh[!(gname_sh$id %in% countries_sh_na$id), ]
+  # Output directory
+  if (!file.exists("txt-get_country_shoreline")) {
+    dir.create("txt-get_country_shoreline")
+  }
   report <- cbind(c("Coordinate pairs processed: ",
     "Country names returned: ",
     "Country names missing: "),
     c(nrow(icoords), nrow(countries_sh), nrow(countries_sh_na)))
   if (nrow(countries_sh) != 0 && nrow(countries_sh_na) == 0) {
     ctxt <- paste("countries_shoreline_", as.character(tol),  ".txt", sep = "")
-    write.table(countries_sh, file = ctxt,
+    folctxt <- paste("txt-get_country_shoreline", ctxt, sep = "/")
+    write.table(countries_sh, file = folctxt,
       row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
     crdata <- paste("out_get_country_shoreline_", as.character(tol),
       ".RData", sep = "")
     save(countries_sh, file = crdata)
-    cat("\n")
-    cat("Please check 'countries_shoreline_tol.txt' and \n")
-    cat("'out_get_country_shoreline_tol.RData'.\n\n")
+    cat("The data frame 'countries_sh' was saved into \n")
+    cat("out_get_country_shoreline_tol.RData in the working directory.\n\n")
+    cat("Please check also the directory \\txt-get_country_shoreline.\n\n")
   }
   if (nrow(countries_sh) != 0 && nrow(countries_sh_na) != 0) {
     ctxt <- paste("countries_shoreline_", as.character(tol),  ".txt", sep = "")
-    write.table(countries_sh, file = ctxt,
+    folctxt <- paste("txt-get_country_shoreline", ctxt, sep = "/")
+    write.table(countries_sh, file = folctxt,
       row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
     mctxt <- paste("missing_countries_shoreline_",
       as.character(tol), ".txt", sep = "")
-    write.table(countries_sh_na, file = mctxt,
+    folmctxt <- paste("txt-get_country_shoreline", mctxt, sep = "/")
+    write.table(countries_sh_na, file = folmctxt,
       row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
     miss_countries_sh <- countries_sh_na[, 1:3, drop = FALSE]
     crdata <- paste("out_get_country_shoreline_", as.character(tol),
       ".RData", sep = "")
     save(countries_sh, miss_countries_sh, file = crdata)
+    cat("The data frames 'countries_sh' and 'miss_countries_sh' were saved \n")
+    cat("into out_get_country_shoreline_tol.RData in the working \n")
+    cat("directory.\n\n")
+    cat("Please check also the directory \\txt-get_country_shoreline.\n\n")
     cat("There are still unnamed points.\n")
     cat("Please, try with a greater tolerance or run get_sea() \n")
     cat("with 'miss_countries_sh' as input parameter. \n")
-    cat("Please check 'countries_shoreline_tol.txt', \n")
-    cat("'missing_countries_shoreline_tol.txt' and \n")
-    cat("'out_get_country_shoreline_tol.RData'.\n\n")
   }
   if (nrow(countries_sh) == 0 && nrow(countries_sh_na) != 0) {
     mctxt <- paste("missing_countries_shoreline_",
       as.character(tol), ".txt", sep = "")
-    write.table(countries_sh_na, file = mctxt,
+    folmctxt <- paste("txt-get_country_shoreline", mctxt, sep = "/")
+    write.table(countries_sh_na, file = folmctxt,
       row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
     miss_countries_sh <- countries_sh_na[, 1:3, drop = FALSE]
     mcrdata <- paste("out_get_country_shoreline_", as.character(tol),
       ".RData", sep = "")
     save(miss_countries_sh, file = mcrdata)
-    cat("\n")
-    cat("Missing country names for all points.\n")
+    cat("The data frame 'miss_countries_sh' was saved into \n")
+    cat("out_get_country_shoreline_tol.RData in the working directory.\n\n")
+    cat("Please check also the directory \\txt-get_country_shoreline.\n\n")
+    cat("Missing country names for all the given points.\n")
     cat("Please, try with a greater tolerance.\n")
-    cat("Please check 'missing_countries_shoreline_tol.txt' and \n")
-    cat("'out_get_country_shoreline_tol.RData'.\n\n")
   }
   rm("countries_polys_50m", envir = .GlobalEnv)
   return(as.table(report))
