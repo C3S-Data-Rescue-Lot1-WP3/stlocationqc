@@ -9,7 +9,7 @@ get_country_shoreline(icoords, tol)
 \arguments{
 \item{icoords}{data frame with three columns: \strong{id | lon | lat} where:
 'id' is the row identifier for the coordinates in the original list of
-coordinates, 'lon' is the longitude in the range [-180, +180] and 'lat' is
+coordinates, 'lon' is the longitude in the range (-180, +180) and 'lat' is
 the latitude. Both coordinates are in decimal degrees.}
 
 \item{tol}{is the tolerance in meters. By default, tol = 500 meters.}
@@ -29,19 +29,22 @@ error until 500 m towards the sea.
 \details{
 \strong{Input:}
 \itemize{
-\item The output of \code{\link{get_country}}, i.e., a data frame with three
-columns: \strong{id | lon | lat}.
+\item The output of \code{\link{get_country}} - \strong{'miss_countries'} -,
+i.e., a data frame with three columns: \strong{id | lon | lat}.
 }
 \strong{Output:}
 \itemize{
-\item Eventually, a text file with the points for which a country name was
-determined. That file has the following header: \strong{id | lon | lat |
-country | sovereignt | adm0_a3 | name_de | name_es | name_fr | name_pt}.
-\item Eventually, a text file with the points missing country names.
-\item A .RData file with the country names data frame - 'countries_sh' -, the
-missing country names data frame - 'miss_countries_sh' - or the both.
-'miss_countries_sh' is the input of \code{\link{get_sea}} to determine the
-remaining names.
+\item A text file with the points for which a country name was
+determined, if they exist. That file has the following header: id | lon | lat |
+country | sovereignt | adm0_a3 | name_de | name_es | name_fr | name_pt.
+\item A text file with the missing country names, if they exist.
+
+\item A .RData file with the output data frame(s). The data frame
+\strong{'countries_sh'} has the header \strong{id | lon | lat | country |
+sovereignt | iso3 | subregion | continent}. The data frame
+\strong{'miss_countries_sh'} has the header \strong{id | lon | lat} and it is
+the input of \code{\link{get_sea}} to determine the sea name were those
+points are located.
 }
 }
 \examples{
@@ -52,15 +55,12 @@ get_lon180(coords = ispd)
 ## Or
 test_geocoord(coords = eraclim_uao_fp)
 ## Then run sequentially
-get_country(icoords)
-get_country_shoreline(icoords, tol)
+get_country(icoords = coords_ok)
+get_country_shoreline(icoords = miss_countries, tol)
 }
 
 }
 \references{
 Made with Natural Earth. Free vector and raster map data @
 naturalearthdata.com.
-}
-\seealso{
-Requires \code{\link[raster]{buffer}}.
 }

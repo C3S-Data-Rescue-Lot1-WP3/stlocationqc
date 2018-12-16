@@ -3,24 +3,26 @@
 #' Given a list of geographic coordinates in marine areas of the world,
 #' determines the geographical name of the sea, ocean, bay, gulf, fjord, etc.
 #' were each one of the points is located. Uses a SpatialPolygonsDataFrame with
-#' 10 m precision containing the polygons and names of oceans/seas, which covers
-#' most of the marine territories on Earth.
+#' 10 m precision containing the polygons and sea names, which covers most of
+#' the marine territories on Earth.
 #'
 #' @details
 #' \strong{Input:}
 #' \itemize{
-#' \item The output of \code{\link{get_country}} or
-#' \code{\link{get_country_shoreline}}, i.e., a data frame with three columns:
+#' \item The output of \code{\link{get_country}} - \strong{'miss_countries'} -,
+#' or the output of \code{\link{get_country_shoreline}}, -
+#' \strong{'miss_countries_sh'} -, i.e., a data frame with three columns:
 #' \strong{id | lon | lat}.
 #' }
 #' \strong{Output:}
 #' \itemize{
-#' \item Eventually, a text file with the points for which a sea name was
-#' determined. That file has the following header: \strong{id | lon | lat |
+#' \item A text file with the points for which a sea name was determined, if
+#' they exist. That file has the following header: \strong{id | lon | lat |
 #' sea}.
-#' \item Eventually, a text file with the points missing sea names.
-#' \item A .RData file with the sea names data frame - 'seas' -, the
-#' missing sea names data frame - 'miss_seas' - or the both.
+#' \item A text file with the missing sea names, if they exist.
+#' \item A .RData file with the output data frame(s). The data frame
+#' \strong{'seas'} has the header \strong{id | lon | lat | sea}. The eventual
+#' data frame \strong{'miss_seas'} has the header \strong{id | lon | lat}.
 #' }
 #'
 #' @references
@@ -29,15 +31,14 @@
 #'
 #' @examples
 #' \dontrun{
-#' ##
 #' ## First run
 #' get_lon180(coords = ispd)
 #' ## Or
 #' test_geocoord(coords = eraclim_uao_fp)
 #' ## Then run sequentially
-#' get_country(icoords)
-#' get_country_shoreline(icoords, tol)
-#' get_sea(icoords)
+#' get_country(icoords = coords_ok)
+#' get_country_shoreline(icoords = miss_countries, tol)
+#' get_sea(icoords = miss_countries_sh)
 #' }
 #'
 #' @usage
@@ -45,7 +46,7 @@
 #'
 #' @param icoords data frame with three columns: \strong{id | lon | lat} where:
 #'   'id' is the row identifier for the coordinates in the original list of
-#'   coordinates, 'lon' is the longitude in the range [-180, +180] and 'lat' is
+#'   coordinates, 'lon' is the longitude in the range (-180, +180) and 'lat' is
 #'   the latitude. Both coordinates are in decimal degrees.
 #'
 #' @import sp
@@ -86,6 +87,10 @@ get_sea <- function(icoords){
   seas_na1 <- gname1[is.na(gname1$sea), ]
   # Subsets the coordinate points with sea names assigned
   seas1 <- gname1[!(gname1$id %in% seas_na1$id), ]
+  # Output directory
+  if (!file.exists("txt-get_sea")) {
+    dir.create("txt-get_sea")
+  }
   # Sea names are assigned to all points using the general names
   if (nrow(seas_na1) == 0) {
     report <- cbind(c("Coordinate pairs processed: ",
@@ -93,10 +98,12 @@ get_sea <- function(icoords){
       "Sea names missing: "),
       c(nrow(gname1), nrow(seas1), nrow(seas_na1)))
     seas <- seas1
-    write.table(seas, file = "seas.txt", row.names = FALSE,
+    write.table(seas, file = "txt-get_sea/seas.txt", row.names = FALSE,
       col.names = TRUE, sep = "\t", quote = FALSE)
     save(seas, file = "seas.RData")
-    cat("Please check 'seas.txt' and 'seas.RData'.\n\n")
+    cat("The data frame 'seas' was saved as .RData in the working \n")
+    cat("directory.\n\n")
+    cat("Please check also the directory \\txt-get_sea.\n\n")
   # Case: Sea names are still missing
   } else {
     # Creates a data frame with only two columns from the unamed points data
@@ -118,18 +125,21 @@ get_sea <- function(icoords){
       "Sea names returned: ",
       "Sea names missing: "),
       c(nrow(gname1), nrow(seas), nrow(seas_na2)))
-    write.table(seas, file = "seas.txt", row.names = FALSE,
+    write.table(seas, file = "txt-get_sea/seas.txt", row.names = FALSE,
       col.names = TRUE, sep = "\t", quote = FALSE)
     if (nrow(seas_na2) == 0) {
       save(seas, file = "seas.RData")
-      cat("Please check 'seas.txt' and 'seas.RData'.\n\n")
+      cat("The data frame 'seas' was saved as .RData in the working \n")
+      cat("directory.\n\n")
+      cat("Please check also the directory \\txt-get_sea.\n\n")
     } else {
-      write.table(seas_na2, file = "missing_seas.txt", row.names = FALSE,
-        col.names = TRUE, sep = "\t", quote = FALSE)
+      write.table(seas_na2, file = "txt-get_sea/missing_seas.txt",
+        row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
       miss_seas <- seas_na2[, 1:3, drop = FALSE]
       save(seas, miss_seas, file = "out_get_sea.RData")
-      cat("Please check 'seas.txt', 'missing_seas.txt' and \n")
-      cat("'out_get_sea.RData'.\n")
+      cat("The data frames 'seas' and 'miss_seas' were saved into \n")
+      cat("'out_get_sea.RData' in the working directory.\n\n")
+      cat("Please check also the directory \\txt-get_sea.\n\n")
       cat("There are names missing.\n\n")
     }
   }
