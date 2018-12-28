@@ -20,11 +20,13 @@ function \code{\link{get_sea}}.
 
 \strong{Shapefile:}
 \itemize{
-\item http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/ne_10m_geography_marine_polys.zip
+\item
+\url{http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/ne_10m_geography_marine_polys.zip}
 }
 \strong{Shapefile metadata:}
 \itemize{
-\item http://www.naturalearthdata.com/downloads/10m-physical-vectors/10m-physical-labels/
+\item
+\url{http://www.naturalearthdata.com/downloads/10m-physical-vectors/10m-physical-labels/}
 }
 }
 \references{

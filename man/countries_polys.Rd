@@ -22,13 +22,18 @@ the functions \code{\link{get_country}} and
 
 \strong{Shapefiles:}
 \itemize{
-\item http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_countries.zip
-\item http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/50m/cultural/ne_50m_admin_0_countries.zip
+\item
+\url{http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_countries.zip}
+\item
+\url{http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/50m/cultural/ne_50m_admin_0_countries.zip}
 }
+
 \strong{Shapefiles metadata:}
 \itemize{
-\item http://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/
-\item http://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-0-countries-2/
+\item
+\url{http://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/}
+\item
+\url{http://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-0-countries-2/}
 }
 }
 \references{
